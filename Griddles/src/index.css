@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background-color: #FAFAF9;
+  color: #1E293B;
+  font-family: system-ui, -apple-system, sans-serif;
+  user-select: none;
+}
+
+.dot-grid {
+  background-image: radial-gradient(#CBD5E1 1.5px, transparent 1.5px);
+  background-size: 24px 24px;
+}

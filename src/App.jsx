@@ -52,7 +52,7 @@ export default function App() {
   // Helper key for solved mapping
   const getPuzzleKey = (catId, setId, puzzleId) => `${catId}-${setId}-${puzzleId}`;
 
-  // Handle typing letters (ignoring spaces for simplicity in guessing)
+  // Handle typing letters
   const handleKeyPress = (letter) => {
     if (!activePuzzle) return;
     const cleanAnswer = activePuzzle.answer.replace(/\s+/g, '');
@@ -156,7 +156,7 @@ export default function App() {
             </div>
           )}
 
-          {/* 3. 15-ICON SET GRID SCREEN */}
+          {/* 3. 15-ICON SET GRID SCREEN (Displays Image Thumbnails with Zero Blank Space) */}
           {currentScreen === 'grid' && selectedSet && (
             <div className="space-y-4 flex-1 flex flex-col">
               <button 
@@ -183,13 +183,27 @@ export default function App() {
                         setActivePuzzle(puzzle);
                         setCurrentScreen('game');
                       }}
-                      className={`aspect-square border-3 border-ink rounded-xl font-black flex flex-col items-center justify-center shadow-cartoon-sm transition-transform active:translate-x-1 active:translate-y-1 ${
-                        isSolved ? 'bg-mintGreen' : 'bg-white hover:bg-slate-100'
-                      }`}
+                      className="aspect-square bg-white border-3 border-ink rounded-xl overflow-hidden relative shadow-cartoon-sm transition-transform active:translate-x-1 active:translate-y-1 group"
                     >
-                      <span className="text-lg">{isSolved ? '✓' : `#${puzzle.id}`}</span>
-                      <span className="text-[10px] opacity-70">{isSolved ? 'SOLVED' : 'LOCKED'}</span>
-                      {isSolved && <span className="text-[9px] bg-white border border-ink px-1 rounded mt-0.5">💡 Fact</span>}
+                      {/* Thumbnail Image filling the entire box with zero blank space */}
+                      <img 
+                        src={puzzle.image} 
+                        alt={`Puzzle #${puzzle.id}`}
+                        className="w-full h-full object-cover"
+                      />
+
+                      {/* Number Tag in Top-Left Corner */}
+                      <div className="absolute top-1 left-1 bg-black/60 text-white text-[10px] font-black px-1.5 py-0.5 rounded-md backdrop-blur-xs">
+                        #{puzzle.id}
+                      </div>
+
+                      {/* Solved Checkmark Overlay badge */}
+                      {isSolved && (
+                        <div className="absolute inset-0 bg-mintGreen/30 backdrop-blur-[1px] flex flex-col items-center justify-center">
+                          <span className="text-xl">✅</span>
+                          <span className="text-[9px] font-black bg-white border border-ink px-1 rounded shadow-xs mt-0.5">💡 Fact</span>
+                        </div>
+                      )}
                     </button>
                   );
                 })}
@@ -212,17 +226,12 @@ export default function App() {
                 </span>
               </div>
 
-              {/* Artwork Frame (Loads your local image from public/images/movies/set1/[id].png) */}
+              {/* Artwork Frame */}
               <div className="bg-white border-4 border-ink rounded-3xl h-48 shadow-cartoon flex items-center justify-center relative overflow-hidden p-2">
                 <img 
                   src={activePuzzle.image} 
                   alt={`Puzzle #${activePuzzle.id}`}
                   className="max-h-full max-w-full object-contain"
-                  onError={(e) => {
-                    // Fallback if image file is missing on local test
-                    e.target.style.display = 'none';
-                    e.target.parentNode.innerHTML += '<div class="text-xs font-bold text-red-500">Image missing in public folder</div>';
-                  }}
                 />
               </div>
 
@@ -234,7 +243,6 @@ export default function App() {
               {/* Answer Boxes */}
               <div className="flex justify-center gap-1 flex-wrap">
                 {activePuzzle.answer.replace(/\s+/g, '').split('').map((_, idx) => {
-                  const cleanAnswer = activePuzzle.answer.replace(/\s+/g, '');
                   const key = getPuzzleKey(selectedCategory.id, selectedSet.id, activePuzzle.id);
                   const currentWord = currentGuesses[key] || "";
                   const char = currentWord[idx] || "";

@@ -9,46 +9,15 @@ export default function App() {
   const [selectedSet, setSelectedSet] = useState(null);
   const [activePuzzle, setActivePuzzle] = useState(null);
   
-  // Track solved puzzles (e.g., {"movies-set1-1": true, ...})
+  // Track solved puzzles
   const [solvedPuzzles, setSolvedPuzzles] = useState({});
   
   // Gameplay input states
   const [currentGuesses, setCurrentGuesses] = useState({});
   const [showWinModal, setShowWinModal] = useState(false);
-  const [activeFunFact, setActiveFunFact] = useState(null);
 
-  // Categories, Sets & Beta Puzzles Data Structure (Ready for your custom data & fun facts!)
+  // Data containing your exact Movies & Series Set 1 lineup
   const categories = [
-    {
-      id: 'people',
-      name: 'FAMOUS PEOPLE',
-      emoji: '🦸',
-      color: 'bg-skyBlue',
-      sets: [
-        {
-          id: 1,
-          name: 'Set 1: Icons & Legends',
-          puzzles: Array.from({ length: 15 }, (_, i) => ({
-            id: i + 1,
-            answer: i === 0 ? "EINSTEIN" : `ICON${i + 1}`,
-            clue: i === 0 ? "Theoretical physicist with wild hair." : `Famous historical figure #${i + 1}`,
-            funFact: i === 0 ? "Albert Einstein failed his university entrance exam on his first try in 1895!" : `Fun fact about icon #${i + 1} goes here!`,
-            art: "⚡🧠"
-          }))
-        },
-        {
-          id: 2,
-          name: 'Set 2: Pop Culture Stars',
-          puzzles: Array.from({ length: 15 }, (_, i) => ({
-            id: i + 1,
-            answer: `STAR${i + 1}`,
-            clue: `Pop culture superstar #${i + 1}`,
-            funFact: `Fun fact about star #${i + 1} goes here!`,
-            art: "🌟🎬"
-          }))
-        }
-      ]
-    },
     {
       id: 'movies',
       name: 'MOVIES & SERIES',
@@ -57,78 +26,48 @@ export default function App() {
       sets: [
         {
           id: 1,
-          name: 'Set 1: Blockbusters',
-          puzzles: Array.from({ length: 15 }, (_, i) => ({
-            id: i + 1,
-            answer: `MOVIE${i + 1}`,
-            clue: `Blockbuster hit #${i + 1}`,
-            funFact: `Fun fact about movie #${i + 1} goes here!`,
-            art: "🍿🎥"
-          }))
-        },
-        {
-          id: 2,
-          name: 'Set 2: Cult Classics',
-          puzzles: Array.from({ length: 15 }, (_, i) => ({
-            id: i + 1,
-            answer: `CLASSIC${i + 1}`,
-            clue: `Cult classic #${i + 1}`,
-            funFact: `Fun fact about classic #${i + 1} goes here!`,
-            art: "📼✨"
-          }))
+          name: 'Set 1: Blockbusters & Icons',
+          puzzles: [
+            { id: 1, answer: "FANTASTICFOUR", clue: "Marvel's premier superhero family.", funFact: "Stan Lee and Jack Kirby created them in 1961 to rival DC's Justice League.", image: "/images/movies/set1/1.png" },
+            { id: 2, answer: "INTERSTELLAR", clue: "Christopher Nolan's space-time bending epic.", funFact: "Theoretical physicist Kip Thorne served as an executive producer to ensure scientific accuracy.", image: "/images/movies/set1/2.png" },
+            { id: 3, answer: "BARBIE", clue: "Greta Gerwig's pink-soaked cultural phenomenon.", funFact: "Production caused a global shortage of pink paint by international supplier Rosenlund.", image: "/images/movies/set1/3.png" },
+            { id: 4, answer: "DUNE", clue: "Denis Villeneuve's sci-fi desert masterpiece.", funFact: "The fictional language of Chakobsa used in the film was built by linguist David J. Peterson.", image: "/images/movies/set1/4.png" },
+            { id: 5, answer: "LALALAND", clue: "Jazz, romance, and starry nights in Los Angeles.", funFact: "Ryan Gosling actually learned to play jazz piano proficiently over three months of intense daily practice.", image: "/images/movies/set1/5.png" },
+            { id: 6, answer: "BREAKINGBAD", clue: "Chemistry teacher turned meth kingpin.", funFact: "The iconic blue methamphetamine prop was actually made out of blue rock candy flavored like cotton candy.", image: "/images/movies/set1/6.png" },
+            { id: 7, answer: "KILLBILL", clue: "The Bride's roaring rampage of revenge.", funFact: "Uma Thurman's iconic yellow tracksuit was a direct tribute to Bruce Lee's outfit in Game of Death.", image: "/images/movies/set1/7.png" },
+            { id: 8, answer: "STARWARS", clue: "A long time ago in a galaxy far, far away...", funFact: "The iconic lightsaber hum was created by sound designer Ben Burrt combining a TV set idle hum and a movie projector motor.", image: "/images/movies/set1/8.png" },
+            { id: 9, answer: "MISSIONIMPOSSIBLE", clue: "Ethan Hunt's death-defying stunts.", funFact: "Tom Cruise famously performs almost all of his own dangerous action stunts without a stunt double.", image: "/images/movies/set1/9.png" },
+            { id: 10, answer: "THESIMPSONS", clue: "Springfield's yellow-skinned animated family.", funFact: "Matt Groening named most of the main characters after members of his own real family.", image: "/images/movies/set1/10.png" },
+            { id: 11, answer: "THESHINING", clue: "All work and no play makes Jack a dull boy.", funFact: "Director Stanley Kubrick forced actor Shelley Duvall to endure extreme psychological stress to capture authentic terror.", image: "/images/movies/set1/11.png" },
+            { id: 12, answer: "BOHEMIANRHAPSODY", clue: "Queen's legendary musical biopic.", funFact: "Rami Malek wore prosthetic teeth for a full year before filming began to master Freddie Mercury's speaking and singing posture.", image: "/images/movies/set1/12.png" },
+            { id: 13, answer: "KINGKONG", clue: "The giant ape atop the Empire State Building.", funFact: "The original 1933 masterpiece pioneered groundbreaking stop-motion animation techniques in cinema history.", image: "/images/movies/set1/13.png" },
+            { id: 14, answer: "THEODYSSEY", clue: "Epic mythological journey across ancient seas.", funFact: "It is one of the oldest foundational works of Western literature credited to the ancient poet Homer.", image: "/images/movies/set1/14.png" },
+            { id: 15, answer: "INSIDEOUT", clue: "Emotions running wild inside an adolescent mind.", funFact: "Neuroscientists and psychologists were consulted during scriptwriting to accurately map out how human memory works.", image: "/images/movies/set1/15.png" }
+          ]
         }
       ]
-    },
-    {
-      id: 'cities',
-      name: 'WORLD CITIES',
-      emoji: '🏙️',
-      color: 'bg-mintGreen',
-      sets: [
-        {
-          id: 1,
-          name: 'Set 1: Global Capitals',
-          puzzles: Array.from({ length: 15 }, (_, i) => ({
-            id: i + 1,
-            answer: `CITY${i + 1}`,
-            clue: `Global capital #${i + 1}`,
-            funFact: `Fun fact about city #${i + 1} goes here!`,
-            art: "🌆🗺️"
-          }))
-        },
-        {
-          id: 2,
-          name: 'Set 2: Iconic Skylines',
-          puzzles: Array.from({ length: 15 }, (_, i) => ({
-            id: i + 1,
-            answer: `SKYLINE${i + 1}`,
-            clue: `Iconic skyline city #${i + 1}`,
-            funFact: `Fun fact about skyline #${i + 1} goes here!`,
-            art: "🌉🏙️"
-          }))
-        }
-      ]
-    },
+    }
   ];
 
   // Helper key for solved mapping
   const getPuzzleKey = (catId, setId, puzzleId) => `${catId}-${setId}-${puzzleId}`;
 
-  // Handle typing letters
+  // Handle typing letters (ignoring spaces for simplicity in guessing)
   const handleKeyPress = (letter) => {
     if (!activePuzzle) return;
+    const cleanAnswer = activePuzzle.answer.replace(/\s+/g, '');
     const key = getPuzzleKey(selectedCategory.id, selectedSet.id, activePuzzle.id);
     const currentWord = currentGuesses[key] || "";
     
-    if (currentWord.length < activePuzzle.answer.length) {
+    if (currentWord.length < cleanAnswer.length) {
       const updatedWord = currentWord + letter;
       const newGuesses = { ...currentGuesses, [key]: updatedWord };
       setCurrentGuesses(newGuesses);
 
       // Check if word is complete and correct
-      if (updatedWord === activePuzzle.answer) {
+      if (updatedWord === cleanAnswer) {
         setSolvedPuzzles(prev => ({ ...prev, [key]: true }));
-        setCoins(prev => prev + 10); // Reward coins
+        setCoins(prev => prev + 10);
         setShowWinModal(true);
       }
     }
@@ -162,7 +101,7 @@ export default function App() {
         {/* Screen Area */}
         <div className="flex-1 overflow-y-auto p-4 flex flex-col relative">
           
-          {/* 1. HOME SCREEN: 3 Categories */}
+          {/* 1. HOME SCREEN */}
           {currentScreen === 'home' && (
             <div className="space-y-4 flex-1 flex flex-col justify-center">
               <h2 className="text-center font-black text-xl mb-2 tracking-wide">CHOOSE A CATEGORY</h2>
@@ -175,7 +114,7 @@ export default function App() {
                 >
                   <div>
                     <div className="text-2xl">{cat.emoji} {cat.name}</div>
-                    <div className="text-xs opacity-90 font-bold mt-1">Beta Beta Ready (2 Sets)</div>
+                    <div className="text-xs opacity-90 font-bold mt-1">Beta Test: Set 1 Ready</div>
                   </div>
                   <span className="text-2xl">➡️</span>
                 </button>
@@ -183,7 +122,7 @@ export default function App() {
             </div>
           )}
 
-          {/* 2. SET SELECTION SCREEN: Choose Set 1 or Set 2 */}
+          {/* 2. SET SELECTION SCREEN */}
           {currentScreen === 'sets' && selectedCategory && (
             <div className="space-y-4 flex-1 flex flex-col">
               <button 
@@ -196,7 +135,7 @@ export default function App() {
               <div className="text-center my-2">
                 <span className="text-3xl">{selectedCategory.emoji}</span>
                 <h3 className="font-black text-xl mt-1">{selectedCategory.name}</h3>
-                <p className="text-xs font-bold opacity-70">Select a Set to Play</p>
+                <p className="text-xs font-bold opacity-70">Select Set 1 Beta Test</p>
               </div>
 
               <div className="space-y-4 flex-1 flex flex-col justify-center">
@@ -208,7 +147,7 @@ export default function App() {
                   >
                     <div>
                       <div className="text-lg">{set.name}</div>
-                      <div className="text-xs text-slate-500 font-bold mt-1">15 Puzzles Available</div>
+                      <div className="text-xs text-slate-500 font-bold mt-1">15 Puzzles Loaded</div>
                     </div>
                     <span className="text-2xl">🧩</span>
                   </button>
@@ -217,7 +156,7 @@ export default function App() {
             </div>
           )}
 
-          {/* 3. 15-ICON SET GRID SCREEN (Shows Fun Fact Badge when solved) */}
+          {/* 3. 15-ICON SET GRID SCREEN */}
           {currentScreen === 'grid' && selectedSet && (
             <div className="space-y-4 flex-1 flex flex-col">
               <button 
@@ -273,9 +212,18 @@ export default function App() {
                 </span>
               </div>
 
-              {/* Artwork Frame */}
-              <div className="bg-white border-4 border-ink rounded-3xl h-40 shadow-cartoon flex items-center justify-center relative overflow-hidden">
-                <div className="text-6xl">{activePuzzle.art}</div>
+              {/* Artwork Frame (Loads your local image from public/images/movies/set1/[id].png) */}
+              <div className="bg-white border-4 border-ink rounded-3xl h-48 shadow-cartoon flex items-center justify-center relative overflow-hidden p-2">
+                <img 
+                  src={activePuzzle.image} 
+                  alt={`Puzzle #${activePuzzle.id}`}
+                  className="max-h-full max-w-full object-contain"
+                  onError={(e) => {
+                    // Fallback if image file is missing on local test
+                    e.target.style.display = 'none';
+                    e.target.parentNode.innerHTML += '<div class="text-xs font-bold text-red-500">Image missing in public folder</div>';
+                  }}
+                />
               </div>
 
               {/* Clue Text */}
@@ -285,7 +233,8 @@ export default function App() {
 
               {/* Answer Boxes */}
               <div className="flex justify-center gap-1 flex-wrap">
-                {activePuzzle.answer.split('').map((_, idx) => {
+                {activePuzzle.answer.replace(/\s+/g, '').split('').map((_, idx) => {
+                  const cleanAnswer = activePuzzle.answer.replace(/\s+/g, '');
                   const key = getPuzzleKey(selectedCategory.id, selectedSet.id, activePuzzle.id);
                   const currentWord = currentGuesses[key] || "";
                   const char = currentWord[idx] || "";
@@ -323,7 +272,7 @@ export default function App() {
           {/* WIN & FUN FACT MODAL */}
           {showWinModal && activePuzzle && (
             <div className="absolute inset-0 bg-slate-900/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-              <div className="bg-paper border-4 border-ink p-6 rounded-3xl shadow-cartoon w-full max-w-xs space-y-4 text-center animate-bounce-once">
+              <div className="bg-paper border-4 border-ink p-6 rounded-3xl shadow-cartoon w-full max-w-xs space-y-4 text-center">
                 <div className="text-4xl">🎉</div>
                 <h3 className="font-black text-xl">CORRECT!</h3>
                 <p className="font-bold text-sm text-slate-700">You solved <span className="underline">{activePuzzle.answer}</span>!</p>

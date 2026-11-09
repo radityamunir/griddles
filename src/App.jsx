@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 
 export default function App() {
   const [currentScreen, setCurrentScreen] = useState('home'); // 'home', 'sets', 'grid', 'game'
@@ -16,15 +16,8 @@ export default function App() {
   const [currentGuesses, setCurrentGuesses] = useState({});
   const [showWinModal, setShowWinModal] = useState(false);
   
-  // Ref to automatically focus hidden input for physical/mobile keyboard
+  // Ref for hidden input
   const inputRef = useRef(null);
-
-  // Auto-focus the hidden input when entering the game screen
-  useEffect(() => {
-    if (currentScreen === 'game' && inputRef.current) {
-      inputRef.current.focus();
-    }
-  }, [currentScreen, activePuzzle]);
 
   // Data containing your Movies & Series Set 1 lineup
   const categories = [
@@ -66,7 +59,7 @@ export default function App() {
   const handleInputChange = (e) => {
     if (!activePuzzle) return;
     const cleanAnswer = activePuzzle.answer.replace(/\s+/g, '');
-    const rawInput = e.target.value.toUpperCase().replace(/[^A-Z]/g, ''); // Only allow uppercase letters A-Z
+    const rawInput = e.target.value.toUpperCase().replace(/[^A-Z]/g, '');
     
     if (rawInput.length <= cleanAnswer.length) {
       const key = getPuzzleKey(selectedCategory.id, selectedSet.id, activePuzzle.id);
@@ -84,15 +77,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-slate-950 flex items-center justify-center p-0 sm:py-6">
-      <div 
-        className="w-full sm:max-w-[390px] h-screen sm:h-[844px] bg-paper dot-grid border-4 border-ink shadow-2xl sm:rounded-3xl flex flex-col overflow-hidden relative cursor-text"
-        onClick={() => {
-          // Focus hidden input if tapping anywhere on the game screen
-          if (currentScreen === 'game' && inputRef.current) {
-            inputRef.current.focus();
-          }
-        }}
-      >
+      <div className="w-full sm:max-w-[390px] h-screen sm:h-[844px] bg-paper dot-grid border-4 border-ink shadow-2xl sm:rounded-3xl flex flex-col overflow-hidden relative">
         
         {/* Top Header */}
         <div className="bg-electricYellow border-b-4 border-ink px-4 py-3 flex items-center justify-between shadow-cartoon-sm z-10">
@@ -212,25 +197,25 @@ export default function App() {
             </div>
           )}
 
-          {/* 4. GUESSER GAMEPLAY SCREEN (Using Native Keyboard & Larger Artwork) */}
+          {/* 4. GUESSER GAMEPLAY SCREEN (No Auto-Popup, Compact No-Scroll Proportions) */}
           {currentScreen === 'game' && activePuzzle && (() => {
             const key = getPuzzleKey(selectedCategory.id, selectedSet.id, activePuzzle.id);
             const currentWord = currentGuesses[key] || "";
             let letterIndex = 0;
 
             return (
-              <div className="space-y-4 flex-1 flex flex-col justify-between py-2">
+              <div className="space-y-3 flex-1 flex flex-col justify-between py-1">
                 
-                {/* Hidden native input to capture keyboard typing */}
+                {/* Hidden native input (NO autoFocus, pops up ONLY on click/tap) */}
                 <input 
                   ref={inputRef}
                   type="text"
                   value={currentWord}
                   onChange={handleInputChange}
                   className="absolute opacity-0 pointer-events-none"
-                  autoFocus
                 />
 
+                {/* Top Navigation */}
                 <div className="flex justify-between items-center">
                   <button 
                     onClick={() => setCurrentScreen('grid')}
@@ -243,8 +228,8 @@ export default function App() {
                   </span>
                 </div>
 
-                {/* Larger Artwork Frame taking up spacious central area */}
-                <div className="w-60 h-60 mx-auto bg-white border-4 border-ink rounded-3xl shadow-cartoon overflow-hidden flex items-center justify-center">
+                {/* Artwork Frame (Optimized size so it sits comfortably right above typing area) */}
+                <div className="w-48 h-48 mx-auto bg-white border-4 border-ink rounded-3xl shadow-cartoon overflow-hidden flex items-center justify-center">
                   <img 
                     src={activePuzzle.image} 
                     alt={`Puzzle #${activePuzzle.id}`}
@@ -253,31 +238,38 @@ export default function App() {
                 </div>
 
                 {/* Clue Text */}
-                <div className="bg-amber-100 border-2 border-ink p-2.5 rounded-2xl text-center text-xs font-bold shadow-cartoon-sm">
+                <div className="bg-amber-100 border-2 border-ink p-2 rounded-xl text-center text-xs font-bold shadow-cartoon-sm">
                   💡 Clue: {activePuzzle.clue}
                 </div>
 
-                {/* Answer Boxes with Spacing */}
-                <div className="flex justify-center gap-1.5 flex-wrap items-center">
-                  {activePuzzle.answer.split('').map((char, idx) => {
-                    if (char === ' ') {
-                      return <div key={idx} className="w-4 h-10" />;
-                    }
-                    
-                    const currentChar = currentWord[letterIndex] || "";
-                    letterIndex++;
+                {/* Interactive Answer Boxes (Clicking here triggers the keyboard!) */}
+                <div 
+                  onClick={() => {
+                    if (inputRef.current) inputRef.current.focus();
+                  }}
+                  className="bg-slate-100/80 border-2 border-dashed border-ink p-3 rounded-2xl flex flex-col items-center gap-2 cursor-pointer hover:bg-slate-200/50 transition-colors shadow-cartoon-sm"
+                >
+                  <div className="flex justify-center gap-1.5 flex-wrap items-center">
+                    {activePuzzle.answer.split('').map((char, idx) => {
+                      if (char === ' ') {
+                        return <div key={idx} className="w-3 h-9" />;
+                      }
+                      
+                      const currentChar = currentWord[letterIndex] || "";
+                      letterIndex++;
 
-                    return (
-                      <div key={idx} className="w-8 h-10 bg-white border-3 border-ink rounded-xl flex items-center justify-center font-black text-lg shadow-cartoon-sm">
-                        {currentChar}
-                      </div>
-                    );
-                  })}
+                      return (
+                        <div key={idx} className="w-7 h-9 bg-white border-3 border-ink rounded-lg flex items-center justify-center font-black text-md shadow-cartoon-sm">
+                          {currentChar}
+                        </div>
+                      );
+                    })}
+                  </div>
+                  <span className="text-[10px] font-black text-slate-500 uppercase tracking-wider">
+                    👆 Tap here to type answer
+                  </span>
                 </div>
 
-                <div className="text-center text-[11px] font-bold opacity-60">
-                  ⌨️ Type with your device keyboard
-                </div>
               </div>
             );
           })()}

@@ -16,7 +16,7 @@ export default function App() {
   const [currentGuesses, setCurrentGuesses] = useState({});
   const [showWinModal, setShowWinModal] = useState(false);
 
-  // Data containing your Movies & Series Set 1 lineup (with proper spaces in answers)
+  // Data containing your Movies & Series Set 1 lineup
   const categories = [
     {
       id: 'movies',
@@ -52,7 +52,7 @@ export default function App() {
   // Helper key for solved mapping
   const getPuzzleKey = (catId, setId, puzzleId) => `${catId}-${setId}-${puzzleId}`;
 
-  // Handle typing letters (compares against letters-only version)
+  // Handle typing letters
   const handleKeyPress = (letter) => {
     if (!activePuzzle) return;
     const cleanAnswer = activePuzzle.answer.replace(/\s+/g, '');
@@ -228,12 +228,12 @@ export default function App() {
                   </span>
                 </div>
 
-                {/* Artwork Frame */}
-                <div className="bg-white border-4 border-ink rounded-3xl h-48 shadow-cartoon flex items-center justify-center relative overflow-hidden p-2">
+                {/* Upgraded Artwork Frame: Proportioned, rounded corners, zero dead space */}
+                <div className="w-44 h-44 mx-auto bg-white border-4 border-ink rounded-2xl shadow-cartoon overflow-hidden flex items-center justify-center">
                   <img 
                     src={activePuzzle.image} 
                     alt={`Puzzle #${activePuzzle.id}`}
-                    className="max-h-full max-w-full object-contain"
+                    className="w-full h-full object-cover"
                   />
                 </div>
 
@@ -242,11 +242,10 @@ export default function App() {
                   💡 Clue: {activePuzzle.clue}
                 </div>
 
-                {/* Answer Boxes with Automatic Spacing */}
+                {/* Answer Boxes with Spacing */}
                 <div className="flex justify-center gap-1 flex-wrap items-center">
                   {activePuzzle.answer.split('').map((char, idx) => {
                     if (char === ' ') {
-                      // Render a visible space gap between words
                       return <div key={idx} className="w-3 h-9" />;
                     }
                     

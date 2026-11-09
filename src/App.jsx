@@ -80,15 +80,15 @@ export default function App() {
       <div className="w-full sm:max-w-[390px] h-screen sm:h-[844px] bg-paper dot-grid border-4 border-ink shadow-2xl sm:rounded-3xl flex flex-col overflow-hidden relative">
         
         {/* Top Header */}
-        <div className="bg-electricYellow border-b-4 border-ink px-4 py-3 flex items-center justify-between shadow-cartoon-sm z-10">
+        <div className="bg-electricYellow border-b-4 border-ink px-4 py-2.5 flex items-center justify-between shadow-cartoon-sm z-10 shrink-0">
           <h1 className="font-black tracking-wider text-xl transform -rotate-1">GRIDDLES</h1>
-          <div className="bg-white border-2 border-ink px-3 py-1 rounded-full font-bold text-sm shadow-cartoon-sm flex items-center gap-1">
+          <div className="bg-white border-2 border-ink px-3 py-0.5 rounded-full font-bold text-sm shadow-cartoon-sm flex items-center gap-1">
             <span>🪙</span> {coins}
           </div>
         </div>
 
         {/* Screen Area */}
-        <div className="flex-1 overflow-y-auto p-4 flex flex-col relative">
+        <div className="flex-1 overflow-y-auto p-3 flex flex-col relative">
           
           {/* 1. HOME SCREEN */}
           {currentScreen === 'home' && (
@@ -197,16 +197,16 @@ export default function App() {
             </div>
           )}
 
-          {/* 4. GUESSER GAMEPLAY SCREEN (No Auto-Popup, Compact No-Scroll Proportions) */}
+          {/* 4. GUESSER GAMEPLAY SCREEN (Optimized Compact Upper Layout) */}
           {currentScreen === 'game' && activePuzzle && (() => {
             const key = getPuzzleKey(selectedCategory.id, selectedSet.id, activePuzzle.id);
             const currentWord = currentGuesses[key] || "";
             let letterIndex = 0;
 
             return (
-              <div className="space-y-3 flex-1 flex flex-col justify-between py-1">
+              <div className="space-y-2.5 flex-1 flex flex-col justify-start">
                 
-                {/* Hidden native input (NO autoFocus, pops up ONLY on click/tap) */}
+                {/* Hidden native input */}
                 <input 
                   ref={inputRef}
                   type="text"
@@ -216,20 +216,20 @@ export default function App() {
                 />
 
                 {/* Top Navigation */}
-                <div className="flex justify-between items-center">
+                <div className="flex justify-between items-center shrink-0">
                   <button 
                     onClick={() => setCurrentScreen('grid')}
-                    className="bg-white border-2 border-ink px-3 py-1 rounded-xl font-bold text-sm shadow-cartoon-sm"
+                    className="bg-white border-2 border-ink px-3 py-0.5 rounded-xl font-bold text-xs shadow-cartoon-sm"
                   >
                     ⬅️ Back to Grid
                   </button>
-                  <span className="font-black text-xs bg-electricYellow border-2 border-ink px-2 py-1 rounded-lg">
+                  <span className="font-black text-xs bg-electricYellow border-2 border-ink px-2 py-0.5 rounded-lg">
                     PUZZLE #{activePuzzle.id}
                   </span>
                 </div>
 
-                {/* Artwork Frame (Optimized size so it sits comfortably right above typing area) */}
-                <div className="w-48 h-48 mx-auto bg-white border-4 border-ink rounded-3xl shadow-cartoon overflow-hidden flex items-center justify-center">
+                {/* Compact Artwork Frame (Sized perfectly to stay in upper viewport) */}
+                <div className="w-36 h-36 mx-auto bg-white border-3 border-ink rounded-2xl shadow-cartoon overflow-hidden flex items-center justify-center shrink-0">
                   <img 
                     src={activePuzzle.image} 
                     alt={`Puzzle #${activePuzzle.id}`}
@@ -238,34 +238,34 @@ export default function App() {
                 </div>
 
                 {/* Clue Text */}
-                <div className="bg-amber-100 border-2 border-ink p-2 rounded-xl text-center text-xs font-bold shadow-cartoon-sm">
+                <div className="bg-amber-100 border-2 border-ink px-3 py-1.5 rounded-xl text-center text-xs font-bold shadow-cartoon-sm shrink-0">
                   💡 Clue: {activePuzzle.clue}
                 </div>
 
-                {/* Interactive Answer Boxes (Clicking here triggers the keyboard!) */}
+                {/* Interactive Answer Boxes */}
                 <div 
                   onClick={() => {
                     if (inputRef.current) inputRef.current.focus();
                   }}
-                  className="bg-slate-100/80 border-2 border-dashed border-ink p-3 rounded-2xl flex flex-col items-center gap-2 cursor-pointer hover:bg-slate-200/50 transition-colors shadow-cartoon-sm"
+                  className="bg-slate-100/80 border-2 border-dashed border-ink p-2.5 rounded-2xl flex flex-col items-center gap-1.5 cursor-pointer hover:bg-slate-200/50 transition-colors shadow-cartoon-sm shrink-0"
                 >
-                  <div className="flex justify-center gap-1.5 flex-wrap items-center">
+                  <div className="flex justify-center gap-1 flex-wrap items-center">
                     {activePuzzle.answer.split('').map((char, idx) => {
                       if (char === ' ') {
-                        return <div key={idx} className="w-3 h-9" />;
+                        return <div key={idx} className="w-2.5 h-8" />;
                       }
                       
                       const currentChar = currentWord[letterIndex] || "";
                       letterIndex++;
 
                       return (
-                        <div key={idx} className="w-7 h-9 bg-white border-3 border-ink rounded-lg flex items-center justify-center font-black text-md shadow-cartoon-sm">
+                        <div key={idx} className="w-6 h-8 bg-white border-2 border-ink rounded-lg flex items-center justify-center font-black text-sm shadow-cartoon-sm">
                           {currentChar}
                         </div>
                       );
                     })}
                   </div>
-                  <span className="text-[10px] font-black text-slate-500 uppercase tracking-wider">
+                  <span className="text-[9px] font-black text-slate-500 uppercase tracking-wider">
                     👆 Tap here to type answer
                   </span>
                 </div>

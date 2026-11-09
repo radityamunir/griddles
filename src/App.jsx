@@ -16,7 +16,7 @@ export default function App() {
   const [currentGuesses, setCurrentGuesses] = useState({});
   const [showWinModal, setShowWinModal] = useState(false);
 
-  // Data containing your exact Movies & Series Set 1 lineup
+  // Data containing your Movies & Series Set 1 lineup (with proper spaces in answers)
   const categories = [
     {
       id: 'movies',
@@ -28,21 +28,21 @@ export default function App() {
           id: 1,
           name: 'Set 1: Blockbusters & Icons',
           puzzles: [
-            { id: 1, answer: "FANTASTICFOUR", clue: "Marvel's premier superhero family.", funFact: "Stan Lee and Jack Kirby created them in 1961 to rival DC's Justice League.", image: "/images/movies/set1/1.png" },
+            { id: 1, answer: "FANTASTIC FOUR", clue: "Marvel's premier superhero family.", funFact: "Stan Lee and Jack Kirby created them in 1961 to rival DC's Justice League.", image: "/images/movies/set1/1.png" },
             { id: 2, answer: "INTERSTELLAR", clue: "Christopher Nolan's space-time bending epic.", funFact: "Theoretical physicist Kip Thorne served as an executive producer to ensure scientific accuracy.", image: "/images/movies/set1/2.png" },
             { id: 3, answer: "BARBIE", clue: "Greta Gerwig's pink-soaked cultural phenomenon.", funFact: "Production caused a global shortage of pink paint by international supplier Rosenlund.", image: "/images/movies/set1/3.png" },
             { id: 4, answer: "DUNE", clue: "Denis Villeneuve's sci-fi desert masterpiece.", funFact: "The fictional language of Chakobsa used in the film was built by linguist David J. Peterson.", image: "/images/movies/set1/4.png" },
-            { id: 5, answer: "LALALAND", clue: "Jazz, romance, and starry nights in Los Angeles.", funFact: "Ryan Gosling actually learned to play jazz piano proficiently over three months of intense daily practice.", image: "/images/movies/set1/5.png" },
-            { id: 6, answer: "BREAKINGBAD", clue: "Chemistry teacher turned meth kingpin.", funFact: "The iconic blue methamphetamine prop was actually made out of blue rock candy flavored like cotton candy.", image: "/images/movies/set1/6.png" },
-            { id: 7, answer: "KILLBILL", clue: "The Bride's roaring rampage of revenge.", funFact: "Uma Thurman's iconic yellow tracksuit was a direct tribute to Bruce Lee's outfit in Game of Death.", image: "/images/movies/set1/7.png" },
-            { id: 8, answer: "STARWARS", clue: "A long time ago in a galaxy far, far away...", funFact: "The iconic lightsaber hum was created by sound designer Ben Burrt combining a TV set idle hum and a movie projector motor.", image: "/images/movies/set1/8.png" },
-            { id: 9, answer: "MISSIONIMPOSSIBLE", clue: "Ethan Hunt's death-defying stunts.", funFact: "Tom Cruise famously performs almost all of his own dangerous action stunts without a stunt double.", image: "/images/movies/set1/9.png" },
-            { id: 10, answer: "THESIMPSONS", clue: "Springfield's yellow-skinned animated family.", funFact: "Matt Groening named most of the main characters after members of his own real family.", image: "/images/movies/set1/10.png" },
-            { id: 11, answer: "THESHINING", clue: "All work and no play makes Jack a dull boy.", funFact: "Director Stanley Kubrick forced actor Shelley Duvall to endure extreme psychological stress to capture authentic terror.", image: "/images/movies/set1/11.png" },
-            { id: 12, answer: "BOHEMIANRHAPSODY", clue: "Queen's legendary musical biopic.", funFact: "Rami Malek wore prosthetic teeth for a full year before filming began to master Freddie Mercury's speaking and singing posture.", image: "/images/movies/set1/12.png" },
-            { id: 13, answer: "KINGKONG", clue: "The giant ape atop the Empire State Building.", funFact: "The original 1933 masterpiece pioneered groundbreaking stop-motion animation techniques in cinema history.", image: "/images/movies/set1/13.png" },
-            { id: 14, answer: "THEODYSSEY", clue: "Epic mythological journey across ancient seas.", funFact: "It is one of the oldest foundational works of Western literature credited to the ancient poet Homer.", image: "/images/movies/set1/14.png" },
-            { id: 15, answer: "INSIDEOUT", clue: "Emotions running wild inside an adolescent mind.", funFact: "Neuroscientists and psychologists were consulted during scriptwriting to accurately map out how human memory works.", image: "/images/movies/set1/15.png" }
+            { id: 5, answer: "LA LA LAND", clue: "Jazz, romance, and starry nights in Los Angeles.", funFact: "Ryan Gosling actually learned to play jazz piano proficiently over three months of intense daily practice.", image: "/images/movies/set1/5.png" },
+            { id: 6, answer: "BREAKING BAD", clue: "Chemistry teacher turned meth kingpin.", funFact: "The iconic blue methamphetamine prop was actually made out of blue rock candy flavored like cotton candy.", image: "/images/movies/set1/6.png" },
+            { id: 7, answer: "KILL BILL", clue: "The Bride's roaring rampage of revenge.", funFact: "Uma Thurman's iconic yellow tracksuit was a direct tribute to Bruce Lee's outfit in Game of Death.", image: "/images/movies/set1/7.png" },
+            { id: 8, answer: "STAR WARS", clue: "A long time ago in a galaxy far, far away...", funFact: "The iconic lightsaber hum was created by sound designer Ben Burrt combining a TV set idle hum and a movie projector motor.", image: "/images/movies/set1/8.png" },
+            { id: 9, answer: "MISSION IMPOSSIBLE", clue: "Ethan Hunt's death-defying stunts.", funFact: "Tom Cruise famously performs almost all of his own dangerous action stunts without a stunt double.", image: "/images/movies/set1/9.png" },
+            { id: 10, answer: "THE SIMPSONS", clue: "Springfield's yellow-skinned animated family.", funFact: "Matt Groening named most of the main characters after members of his own real family.", image: "/images/movies/set1/10.png" },
+            { id: 11, answer: "THE SHINING", clue: "All work and no play makes Jack a dull boy.", funFact: "Director Stanley Kubrick forced actor Shelley Duvall to endure extreme psychological stress to capture authentic terror.", image: "/images/movies/set1/11.png" },
+            { id: 12, answer: "BOHEMIAN RHAPSODY", clue: "Queen's legendary musical biopic.", funFact: "Rami Malek wore prosthetic teeth for a full year before filming began to master Freddie Mercury's speaking and singing posture.", image: "/images/movies/set1/12.png" },
+            { id: 13, answer: "KING KONG", clue: "The giant ape atop the Empire State Building.", funFact: "The original 1933 masterpiece pioneered groundbreaking stop-motion animation techniques in cinema history.", image: "/images/movies/set1/13.png" },
+            { id: 14, answer: "THE ODYSSEY", clue: "Epic mythological journey across ancient seas.", funFact: "It is one of the oldest foundational works of Western literature credited to the ancient poet Homer.", image: "/images/movies/set1/14.png" },
+            { id: 15, answer: "INSIDE OUT", clue: "Emotions running wild inside an adolescent mind.", funFact: "Neuroscientists and psychologists were consulted during scriptwriting to accurately map out how human memory works.", image: "/images/movies/set1/15.png" }
           ]
         }
       ]
@@ -52,7 +52,7 @@ export default function App() {
   // Helper key for solved mapping
   const getPuzzleKey = (catId, setId, puzzleId) => `${catId}-${setId}-${puzzleId}`;
 
-  // Handle typing letters
+  // Handle typing letters (compares against letters-only version)
   const handleKeyPress = (letter) => {
     if (!activePuzzle) return;
     const cleanAnswer = activePuzzle.answer.replace(/\s+/g, '');
@@ -156,7 +156,7 @@ export default function App() {
             </div>
           )}
 
-          {/* 3. 15-ICON SET GRID SCREEN (Displays Image Thumbnails with Zero Blank Space) */}
+          {/* 3. 15-ICON SET GRID SCREEN */}
           {currentScreen === 'grid' && selectedSet && (
             <div className="space-y-4 flex-1 flex flex-col">
               <button 
@@ -185,19 +185,16 @@ export default function App() {
                       }}
                       className="aspect-square bg-white border-3 border-ink rounded-xl overflow-hidden relative shadow-cartoon-sm transition-transform active:translate-x-1 active:translate-y-1 group"
                     >
-                      {/* Thumbnail Image filling the entire box with zero blank space */}
                       <img 
                         src={puzzle.image} 
                         alt={`Puzzle #${puzzle.id}`}
                         className="w-full h-full object-cover"
                       />
 
-                      {/* Number Tag in Top-Left Corner */}
                       <div className="absolute top-1 left-1 bg-black/60 text-white text-[10px] font-black px-1.5 py-0.5 rounded-md backdrop-blur-xs">
                         #{puzzle.id}
                       </div>
 
-                      {/* Solved Checkmark Overlay badge */}
                       {isSolved && (
                         <div className="absolute inset-0 bg-mintGreen/30 backdrop-blur-[1px] flex flex-col items-center justify-center">
                           <span className="text-xl">✅</span>
@@ -212,70 +209,81 @@ export default function App() {
           )}
 
           {/* 4. GUESSER GAMEPLAY SCREEN */}
-          {currentScreen === 'game' && activePuzzle && (
-            <div className="space-y-3 flex-1 flex flex-col justify-between">
-              <div className="flex justify-between items-center">
-                <button 
-                  onClick={() => setCurrentScreen('grid')}
-                  className="bg-white border-2 border-ink px-3 py-1 rounded-xl font-bold text-sm shadow-cartoon-sm"
-                >
-                  ⬅️ Back to Grid
-                </button>
-                <span className="font-black text-xs bg-electricYellow border-2 border-ink px-2 py-1 rounded-lg">
-                  PUZZLE #{activePuzzle.id}
-                </span>
-              </div>
+          {currentScreen === 'game' && activePuzzle && (() => {
+            const key = getPuzzleKey(selectedCategory.id, selectedSet.id, activePuzzle.id);
+            const currentWord = currentGuesses[key] || "";
+            let letterIndex = 0;
 
-              {/* Artwork Frame */}
-              <div className="bg-white border-4 border-ink rounded-3xl h-48 shadow-cartoon flex items-center justify-center relative overflow-hidden p-2">
-                <img 
-                  src={activePuzzle.image} 
-                  alt={`Puzzle #${activePuzzle.id}`}
-                  className="max-h-full max-w-full object-contain"
-                />
-              </div>
-
-              {/* Clue Text */}
-              <div className="bg-amber-100 border-2 border-ink p-2 rounded-xl text-center text-xs font-bold shadow-cartoon-sm">
-                💡 Clue: {activePuzzle.clue}
-              </div>
-
-              {/* Answer Boxes */}
-              <div className="flex justify-center gap-1 flex-wrap">
-                {activePuzzle.answer.replace(/\s+/g, '').split('').map((_, idx) => {
-                  const key = getPuzzleKey(selectedCategory.id, selectedSet.id, activePuzzle.id);
-                  const currentWord = currentGuesses[key] || "";
-                  const char = currentWord[idx] || "";
-                  return (
-                    <div key={idx} className="w-7 h-9 bg-white border-3 border-ink rounded-lg flex items-center justify-center font-black text-md shadow-cartoon-sm">
-                      {char}
-                    </div>
-                  );
-                })}
-              </div>
-
-              {/* Virtual QWERTY Keyboard */}
-              <div className="bg-slate-200 border-3 border-ink p-2 rounded-2xl shadow-cartoon">
-                <div className="grid grid-cols-7 gap-1 text-center font-black">
-                  {['Q','W','E','R','T','Y','U','I','O','P','A','S','D','F','G','H','J','K','L','Z','X','C','V','B','N','M'].map((letter) => (
-                    <button 
-                      key={letter} 
-                      onClick={() => handleKeyPress(letter)}
-                      className="bg-white border-2 border-ink py-2 rounded-lg shadow-cartoon-sm text-sm active:translate-x-0.5 active:translate-y-0.5 hover:bg-slate-50"
-                    >
-                      {letter}
-                    </button>
-                  ))}
+            return (
+              <div className="space-y-3 flex-1 flex flex-col justify-between">
+                <div className="flex justify-between items-center">
                   <button 
-                    onClick={handleDelete}
-                    className="col-span-2 bg-candyPink text-white border-2 border-ink py-2 rounded-lg shadow-cartoon-sm text-xs active:translate-x-0.5 active:translate-y-0.5"
+                    onClick={() => setCurrentScreen('grid')}
+                    className="bg-white border-2 border-ink px-3 py-1 rounded-xl font-bold text-sm shadow-cartoon-sm"
                   >
-                    DEL ⌫
+                    ⬅️ Back to Grid
                   </button>
+                  <span className="font-black text-xs bg-electricYellow border-2 border-ink px-2 py-1 rounded-lg">
+                    PUZZLE #{activePuzzle.id}
+                  </span>
+                </div>
+
+                {/* Artwork Frame */}
+                <div className="bg-white border-4 border-ink rounded-3xl h-48 shadow-cartoon flex items-center justify-center relative overflow-hidden p-2">
+                  <img 
+                    src={activePuzzle.image} 
+                    alt={`Puzzle #${activePuzzle.id}`}
+                    className="max-h-full max-w-full object-contain"
+                  />
+                </div>
+
+                {/* Clue Text */}
+                <div className="bg-amber-100 border-2 border-ink p-2 rounded-xl text-center text-xs font-bold shadow-cartoon-sm">
+                  💡 Clue: {activePuzzle.clue}
+                </div>
+
+                {/* Answer Boxes with Automatic Spacing */}
+                <div className="flex justify-center gap-1 flex-wrap items-center">
+                  {activePuzzle.answer.split('').map((char, idx) => {
+                    if (char === ' ') {
+                      // Render a visible space gap between words
+                      return <div key={idx} className="w-3 h-9" />;
+                    }
+                    
+                    const currentChar = currentWord[letterIndex] || "";
+                    letterIndex++;
+
+                    return (
+                      <div key={idx} className="w-7 h-9 bg-white border-3 border-ink rounded-lg flex items-center justify-center font-black text-md shadow-cartoon-sm">
+                        {currentChar}
+                      </div>
+                    );
+                  })}
+                </div>
+
+                {/* Virtual QWERTY Keyboard */}
+                <div className="bg-slate-200 border-3 border-ink p-2 rounded-2xl shadow-cartoon">
+                  <div className="grid grid-cols-7 gap-1 text-center font-black">
+                    {['Q','W','E','R','T','Y','U','I','O','P','A','S','D','F','G','H','J','K','L','Z','X','C','V','B','N','M'].map((letter) => (
+                      <button 
+                        key={letter} 
+                        onClick={() => handleKeyPress(letter)}
+                        className="bg-white border-2 border-ink py-2 rounded-lg shadow-cartoon-sm text-sm active:translate-x-0.5 active:translate-y-0.5 hover:bg-slate-50"
+                      >
+                        {letter}
+                      </button>
+                    ))}
+                    <button 
+                      onClick={handleDelete}
+                      className="col-span-2 bg-candyPink text-white border-2 border-ink py-2 rounded-lg shadow-cartoon-sm text-xs active:translate-x-0.5 active:translate-y-0.5"
+                    >
+                      DEL ⌫
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
-          )}
+            );
+          })()}
 
           {/* WIN & FUN FACT MODAL */}
           {showWinModal && activePuzzle && (

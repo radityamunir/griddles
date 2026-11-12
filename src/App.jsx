@@ -19,7 +19,7 @@ export default function App() {
   // Ref for hidden input
   const inputRef = useRef(null);
 
-  // Data containing your Movies & Series Set 1 lineup
+  // Categories & Sets Data Structure (Movies & Series Set 1 & Set 2)
   const categories = [
     {
       id: 'movies',
@@ -46,6 +46,27 @@ export default function App() {
             { id: 13, answer: "KING KONG", clue: "The giant ape atop the Empire State Building.", funFact: "The original 1933 masterpiece pioneered groundbreaking stop-motion animation techniques in cinema history.", image: "/images/movies/set1/13.png" },
             { id: 14, answer: "THE ODYSSEY", clue: "Epic mythological journey across ancient seas.", funFact: "It is one of the oldest foundational works of Western literature credited to the ancient poet Homer.", image: "/images/movies/set1/14.png" },
             { id: 15, answer: "INSIDE OUT", clue: "Emotions running wild inside an adolescent mind.", funFact: "Neuroscientists and psychologists were consulted during scriptwriting to accurately map out how human memory works.", image: "/images/movies/set1/15.png" }
+          ]
+        },
+        {
+          id: 2,
+          name: 'Set 2: Cult Classics & Masterpieces',
+          puzzles: [
+            { id: 1, answer: "BLADE RUNNER 2049", clue: "Denis Villeneuve's neon-drenched cyberpunk sequel.", funFact: "Ryan Gosling accidentally really punched Harrison Ford in the face during a fight scene.", image: "/images/movies/set2/1.png" },
+            { id: 2, answer: "INCEPTION", clue: "A dream within a dream within a dream.", funFact: "The spinning top symbol was inspired by a psychological concept explored in Greek philosophy.", image: "/images/movies/set2/2.png" },
+            { id: 3, answer: "WHIPLASH", clue: "Not quite my tempo.", funFact: "J.K. Simmons actually cracked a rib during the intense physical rehearsal of the slap scene with Miles Teller.", image: "/images/movies/set2/3.png" },
+            { id: 4, answer: "THE GODFATHER", clue: "An offer you cannot refuse.", funFact: "The cat Marlon Brando holds in the opening scene was a stray studio cat that wandered onto the set.", image: "/images/movies/set2/4.png" },
+            { id: 5, answer: "PULP FICTION", clue: "Quentin Tarantino's non-linear crime masterpiece.", funFact: "The briefcase combination '666' has sparked decades of fan theories about what was inside.", image: "/images/movies/set2/5.png" },
+            { id: 6, answer: "THE TRUMAN SHOW", clue: "In case I don't see ya, good afternoon, good evening, and good night!", funFact: "Jim Carrey took a massive pay cut to star in this dramatic role outside his usual comedy style.", image: "/images/movies/set2/6.png" },
+            { id: 7, answer: "FRIENDS", clue: "Six pals hanging out at Central Perk.", funFact: "The iconic orange couch was found in the basement of the Warner Bros. lot storage room.", image: "/images/movies/set2/7.png" },
+            { id: 8, answer: "JURASSIC PARK", clue: "Spared no expense on cloned dinosaurs.", funFact: "The terrifying T-Rex dinosaur roar combined the sounds of an elephant seal, tiger, and alligator.", image: "/images/movies/set2/8.png" },
+            { id: 9, answer: "THE LORD OF THE RINGS", clue: "One Ring to rule them all.", funFact: "Viggo Mortensen broke his toe kicking an orc helmet, and his cry of pain in the film is completely real.", image: "/images/movies/set2/9.png" },
+            { id: 10, answer: "THE MATRIX", clue: "Take the red pill and see how deep the rabbit hole goes.", funFact: "The iconic green digital rain code was actually created using Japanese sushi recipe characters.", image: "/images/movies/set2/10.png" },
+            { id: 11, answer: "ONE PIECE", clue: "Set sail to find the ultimate treasure!", funFact: "Eiichiro Oda has kept strict control over the overarching plot since starting the manga in 1997.", image: "/images/movies/set2/11.png" },
+            { id: 12, answer: "SPIDERMAN", clue: "With great power comes great responsibility.", funFact: "Tobey Maguire caught a lunch tray full of food in one take without CGI during the cafeteria scene.", image: "/images/movies/set2/12.png" },
+            { id: 13, answer: "DUMB AND DUMBER", clue: "So you're telling me there's a chance?", funFact: "Jim Carrey's cracked tooth in the film was real; he chipped it as a kid and removed the cap for comedy effect.", image: "/images/movies/set2/13.png" },
+            { id: 14, answer: "INSIDIOUS", clue: "It's not the house that is haunted.", funFact: "The entire film was shot on a micro-budget in just three weeks inside a residential house in Los Angeles.", image: "/images/movies/set2/14.png" },
+            { id: 15, answer: "MAD MAX", clue: "Witness me across the post-apocalyptic wasteland.", funFact: "Over 80% of the spectacular stunt driving and fiery explosions in Fury Road were practical effects.", image: "/images/movies/set2/15.png" }
           ]
         }
       ]
@@ -103,7 +124,7 @@ export default function App() {
                 >
                   <div>
                     <div className="text-2xl">{cat.emoji} {cat.name}</div>
-                    <div className="text-xs opacity-90 font-bold mt-1">Beta Test: Set 1 Ready</div>
+                    <div className="text-xs opacity-90 font-bold mt-1">Set 1 & Set 2 Ready!</div>
                   </div>
                   <span className="text-2xl">➡️</span>
                 </button>
@@ -124,10 +145,10 @@ export default function App() {
               <div className="text-center my-2">
                 <span className="text-3xl">{selectedCategory.emoji}</span>
                 <h3 className="font-black text-xl mt-1">{selectedCategory.name}</h3>
-                <p className="text-xs font-bold opacity-70">Select Set 1 Beta Test</p>
+                <p className="text-xs font-bold opacity-70">Select a Set to Play</p>
               </div>
 
-              <div className="space-y-4 flex-1 flex flex-col justify-center">
+              <div className="space-y-3 flex-1 flex flex-col justify-center">
                 {selectedCategory.sets.map((set) => (
                   <button 
                     key={set.id}
@@ -197,7 +218,7 @@ export default function App() {
             </div>
           )}
 
-          {/* 4. GUESSER GAMEPLAY SCREEN (Optimized Compact Upper Layout) */}
+          {/* 4. GUESSER GAMEPLAY SCREEN */}
           {currentScreen === 'game' && activePuzzle && (() => {
             const key = getPuzzleKey(selectedCategory.id, selectedSet.id, activePuzzle.id);
             const currentWord = currentGuesses[key] || "";
@@ -228,7 +249,7 @@ export default function App() {
                   </span>
                 </div>
 
-                {/* Compact Artwork Frame (Sized perfectly to stay in upper viewport) */}
+                {/* Compact Artwork Frame */}
                 <div className="w-36 h-36 mx-auto bg-white border-3 border-ink rounded-2xl shadow-cartoon overflow-hidden flex items-center justify-center shrink-0">
                   <img 
                     src={activePuzzle.image} 

@@ -19,7 +19,7 @@ export default function App() {
   // Ref for hidden input
   const inputRef = useRef(null);
 
-  // Categories & Sets Data Structure (Movies & Series Set 1 & Set 2)
+  // Categories & Sets Data Structure
   const categories = [
     {
       id: 'movies',
@@ -52,7 +52,7 @@ export default function App() {
           id: 2,
           name: 'Set 2: Cult Classics & Masterpieces',
           puzzles: [
-            { id: 1, answer: "BLADE RUNNER 2049", clue: "Denis Villeneuve's neon-drenched cyberpunk sequel.", funFact: "Ryan Gosling accidentally really punched Harrison Ford in the face during a fight scene.", image: "/images/movies/set2/1.png" },
+            { id: 1, answer: "BLADE RUNNER 2049", clue: "Denis Villeneuve's neon-drenched cyberpunk sequel.", funFact: "Ryan Gosling actually really punched Harrison Ford in the face during a fight scene.", image: "/images/movies/set2/1.png" },
             { id: 2, answer: "INCEPTION", clue: "A dream within a dream within a dream.", funFact: "The spinning top symbol was inspired by a psychological concept explored in Greek philosophy.", image: "/images/movies/set2/2.png" },
             { id: 3, answer: "WHIPLASH", clue: "Not quite my tempo.", funFact: "J.K. Simmons actually cracked a rib during the intense physical rehearsal of the slap scene with Miles Teller.", image: "/images/movies/set2/3.png" },
             { id: 4, answer: "THE GODFATHER", clue: "An offer you cannot refuse.", funFact: "The cat Marlon Brando holds in the opening scene was a stray studio cat that wandered onto the set.", image: "/images/movies/set2/4.png" },
@@ -67,6 +67,35 @@ export default function App() {
             { id: 13, answer: "DUMB AND DUMBER", clue: "So you're telling me there's a chance?", funFact: "Jim Carrey's cracked tooth in the film was real; he chipped it as a kid and removed the cap for comedy effect.", image: "/images/movies/set2/13.png" },
             { id: 14, answer: "INSIDIOUS", clue: "It's not the house that is haunted.", funFact: "The entire film was shot on a micro-budget in just three weeks inside a residential house in Los Angeles.", image: "/images/movies/set2/14.png" },
             { id: 15, answer: "MAD MAX", clue: "Witness me across the post-apocalyptic wasteland.", funFact: "Over 80% of the spectacular stunt driving and fiery explosions in Fury Road were practical effects.", image: "/images/movies/set2/15.png" }
+          ]
+        }
+      ]
+    },
+    {
+      id: 'people',
+      name: 'FAMOUS PEOPLE',
+      emoji: '🦸',
+      color: 'bg-skyBlue',
+      sets: [
+        {
+          id: 1,
+          name: 'Set 1: Icons & Legends',
+          puzzles: [
+            { id: 1, answer: "MICHAEL JACKSON", clue: "The King of Pop who popularized the moonwalk.", funFact: "Michael Jackson patented special gravity-leaning shoes used in his 'Smooth Criminal' live performances.", image: "/images/peoples/set1/1.png" },
+            { id: 2, answer: "BRUNO MARS", clue: "Grammy-winning retro pop and funk hitmaker.", funFact: "He started his career as an Elvis Presley impersonator in Hawaii when he was just four years old.", image: "/images/peoples/set1/2.png" },
+            { id: 3, answer: "ISAAC NEWTON", clue: "Formulated the laws of motion and universal gravitation.", funFact: "He spent a lot of his time secretly studying alchemy and predicting biblical end times.", image: "/images/peoples/set1/3.png" },
+            { id: 4, answer: "STEPHEN HAWKING", clue: "Theoretical physicist who unlocked the secrets of black holes.", funFact: "Despite losing his voice to ALS, his computerized voice synthesizer retained a distinct American accent.", image: "/images/peoples/set1/4.png" },
+            { id: 5, answer: "NAPOLEON BONAPARTE", clue: "French military commander and emperor.", funFact: "Despite popular myths, Napoleon was actually of average height for a French man during his lifetime.", image: "/images/peoples/set1/5.png" },
+            { id: 6, answer: "MARADONA", clue: "Legendary Argentine footballer of 'Hand of God' fame.", funFact: "There is an actual official religion founded by his fans in Argentina called the Maradoniana Church.", image: "/images/peoples/set1/6.png" },
+            { id: 7, answer: "JOHN CENA", clue: "WWE champion turned Hollywood actor.", funFact: "He holds the record for granting the highest number of wishes (over 650) for the Make-A-Wish Foundation.", image: "/images/peoples/set1/7.png" },
+            { id: 8, answer: "STAN LEE", clue: "The legendary comic book writer who co-created Marvel universe.", funFact: "He made cameo appearances in almost every single Marvel Cinematic Universe film before his passing.", image: "/images/peoples/set1/8.png" },
+            { id: 9, answer: "KATY PERRY", clue: "Pop superstar known for high-energy anthems and Super Bowl halftime shows.", funFact: "She started her music career as a gospel singer releasing Christian music under her birth name Katy Hudson.", image: "/images/peoples/set1/9.png" },
+            { id: 10, answer: "JIMI HENDRIX", clue: "Revolutionary electric guitar virtuoso of the 1960s.", funFact: "He was naturally left-handed and played a right-handed Fender Stratocaster strung upside down.", image: "/images/peoples/set1/10.png" },
+            { id: 11, answer: "HENRY FORD", clue: "Industrialist who revolutionized assembly line manufacturing.", funFact: "He once commissioned a massive rubber plantation town named Fordlândia in the Amazon rainforest.", image: "/images/peoples/set1/11.png" },
+            { id: 12, answer: "KIM JONG UN", clue: "Supreme Leader of North Korea.", funFact: "He is famously known to be an avid fan of American basketball and once hosted former NBA star Dennis Rodman.", image: "/images/peoples/set1/12.png" },
+            { id: 13, answer: "TIGER WOODS", clue: "Golf icon who dominated the sport for decades.", funFact: "He won his very first Masters Tournament in 1997 by a historic 12-stroke margin at age 21.", image: "/images/peoples/set1/13.png" },
+            { id: 14, answer: "SAMUEL L JACKSON", clue: "Prolific actor known for iconic cinematic quotes and badass roles.", funFact: "He has appeared in films that have collectively grossed over $27 billion worldwide, making him one of the highest-grossing actors in history.", image: "/images/peoples/set1/14.png" },
+            { id: 15, answer: "OPPENHEIMER", clue: "Theoretical physicist known as the father of the atomic bomb.", funFact: "He learned Sanskrit and quoted ancient Hindu scripture ('Now I am become Death') after the Trinity test.", image: "/images/peoples/set1/15.png" }
           ]
         }
       ]
@@ -124,7 +153,9 @@ export default function App() {
                 >
                   <div>
                     <div className="text-2xl">{cat.emoji} {cat.name}</div>
-                    <div className="text-xs opacity-90 font-bold mt-1">Set 1 & Set 2 Ready!</div>
+                    <div className="text-xs opacity-90 font-bold mt-1">
+                      {cat.id === 'movies' ? 'Movies & Series Ready' : 'Famous People Set 1 Ready'}
+                    </div>
                   </div>
                   <span className="text-2xl">➡️</span>
                 </button>
@@ -252,9 +283,13 @@ export default function App() {
                 {/* Compact Artwork Frame */}
                 <div className="w-36 h-36 mx-auto bg-white border-3 border-ink rounded-2xl shadow-cartoon overflow-hidden flex items-center justify-center shrink-0">
                   <img 
-                    src={activePuzzle.image} 
+                    src={puzzleImagePath(selectedCategory.id, selectedSet.id, activePuzzle.id)} 
                     alt={`Puzzle #${activePuzzle.id}`}
                     className="w-full h-full object-cover"
+                    onError={(e) => {
+                      // Fallback if image isn't uploaded yet
+                      e.target.src = activePuzzle.image;
+                    }}
                   />
                 </div>
 
@@ -329,4 +364,12 @@ export default function App() {
       </div>
     </div>
   );
+}
+
+// Helper function to handle image paths correctly across categories
+function puzzleImagePath(catId, setId, puzzleId) {
+  if (catId === 'people') {
+    return `/images/peoples/set${setId}/${puzzleId}.png`;
+  }
+  return `/images/${catId}/set${setId}/${puzzleId}.png`;
 }

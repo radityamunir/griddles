@@ -97,6 +97,27 @@ export default function App() {
             { id: 14, answer: "SAMUEL L JACKSON", clue: "Prolific actor known for iconic cinematic quotes and badass roles.", funFact: "He has appeared in films that have collectively grossed over $27 billion worldwide, making him one of the highest-grossing actors in history.", image: "/images/peoples/set1/14.png" },
             { id: 15, answer: "OPPENHEIMER", clue: "Theoretical physicist known as the father of the atomic bomb.", funFact: "He learned Sanskrit and quoted ancient Hindu scripture ('Now I am become Death') after the Trinity test.", image: "/images/peoples/set1/15.png" }
           ]
+        },
+        {
+          id: 2,
+          name: 'Set 2: History & Pop Culture',
+          puzzles: [
+            { id: 1, answer: "ALBERT EINSTEIN", clue: "Genius physicist with iconic hair and the theory of relativity.", funFact: "He was offered the presidency of Israel in 1952, but politely declined the position.", image: "/images/peoples/set2/1.png" },
+            { id: 2, answer: "VAN GOGH", clue: "Post-impressionist Dutch painter of starry nights.", funFact: "During his entire lifetime, he only successfully sold a single painting titled 'The Red Vineyard'.", image: "/images/peoples/set2/2.png" },
+            { id: 3, answer: "GUY FAWKES", clue: "Famous conspirator behind the historic Gunpowder Plot.", funFact: "His iconic face mask featured in V for Vendetta has become a global symbol for political protest.", image: "/images/peoples/set2/3.png" },
+            { id: 4, answer: "ALAN TURING", clue: "Father of modern computer science and codebreaker.", funFact: "He was an Olympic-level marathon runner who frequently ran the 40 miles between Bletchley Park and London for meetings.", image: "/images/peoples/set2/4.png" },
+            { id: 5, answer: "CLEOPATRA", clue: "The legendary last active ruler of the Ptolemaic Kingdom of Egypt.", funFact: "She was actually of Greek Macedonian descent rather than native Egyptian.", image: "/images/peoples/set2/5.png" },
+            { id: 6, answer: "BILLIE EILISH", clue: "Grammy-winning alternative pop singer-songwriter.", funFact: "She recorded the entirety of her multi-platinum debut album inside her brother Finneas's small bedroom studio.", image: "/images/peoples/set2/6.png" },
+            { id: 7, answer: "SERENA WILLIAMS", clue: "Tennis legend and 23-time Grand Slam singles champion.", funFact: "She and her sister Venus used to practice tennis on public courts in Compton that frequently had glass and trash on them.", image: "/images/peoples/set2/7.png" },
+            { id: 8, answer: "USAIN BOLT", clue: "The fastest human in history and Olympic sprint king.", funFact: "As a child growing up in Jamaica, he was actually much more passionate about cricket and European football.", image: "/images/peoples/set2/8.png" },
+            { id: 9, answer: "TAYLOR SWIFT", clue: "Global megastar songwriter shaping modern music culture.", funFact: "She is the first artist in history to win the Grammy Award for Album of the Year four separate times.", image: "/images/peoples/set2/9.png" },
+            { id: 10, answer: "MARILYN MONROE", clue: "Hollywood golden age screen siren and pop icon.", funFact: "She was an avid reader who left behind a personal library containing over 400 classic books.", image: "/images/peoples/set2/10.png" },
+            { id: 11, answer: "OBAMA", clue: "44th President of the United States.", funFact: "He won two Grammy Awards for Best Spoken Word Album for the audiobook recordings of his memoirs.", image: "/images/peoples/set2/11.png" },
+            { id: 12, answer: "GORDON RAMSAY", clue: "Fiery Michelin-starred chef and TV personality.", funFact: "Before pursuing culinary arts full-time, he was a competitive football player whose career was cut short by a knee injury.", image: "/images/peoples/set2/12.png" },
+            { id: 13, answer: "FRIDA KAHLO", clue: "Iconic Mexican painter renowned for vibrant self-portraits.", funFact: "She converted her family home, 'La Casa Azul', into a vibrant blue hub for artists and political thinkers.", image: "/images/peoples/set2/13.png" },
+            { id: 14, answer: "SLASH", clue: "Legendary top-hat-wearing Guns N' Roses lead guitarist.", funFact: "His iconic top hat was originally bought at a store in Los Angeles just a day before his first major band gig.", image: "/images/peoples/set2/14.png" },
+            { id: 15, answer: "STEVE HARVEY", clue: "Comedian and host famous for hosting Family Feud.", funFact: "Before achieving television fame, he spent three years living out of his 1976 Ford Tempo while working odd stand-up gigs.", image: "/images/peoples/set2/15.png" }
+          ]
         }
       ]
     }
@@ -154,7 +175,7 @@ export default function App() {
                   <div>
                     <div className="text-2xl">{cat.emoji} {cat.name}</div>
                     <div className="text-xs opacity-90 font-bold mt-1">
-                      {cat.id === 'movies' ? 'Movies & Series Ready' : 'Famous People Set 1 Ready'}
+                      {cat.id === 'movies' ? 'Sets 1 & 2 Ready' : 'Sets 1 & 2 Ready!'}
                     </div>
                   </div>
                   <span className="text-2xl">➡️</span>
@@ -227,9 +248,12 @@ export default function App() {
                       className="aspect-square bg-white border-3 border-ink rounded-xl overflow-hidden relative shadow-cartoon-sm transition-transform active:translate-x-1 active:translate-y-1 group"
                     >
                       <img 
-                        src={puzzle.image} 
+                        src={puzzleImagePath(selectedCategory.id, selectedSet.id, puzzle.id)} 
                         alt={`Puzzle #${puzzle.id}`}
                         className="w-full h-full object-cover"
+                        onError={(e) => {
+                          e.target.src = puzzle.image;
+                        }}
                       />
 
                       <div className="absolute top-1 left-1 bg-black/60 text-white text-[10px] font-black px-1.5 py-0.5 rounded-md backdrop-blur-xs">
@@ -287,7 +311,6 @@ export default function App() {
                     alt={`Puzzle #${activePuzzle.id}`}
                     className="w-full h-full object-cover"
                     onError={(e) => {
-                      // Fallback if image isn't uploaded yet
                       e.target.src = activePuzzle.image;
                     }}
                   />

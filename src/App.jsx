@@ -19,7 +19,7 @@ export default function App() {
   // Ref for hidden input
   const inputRef = useRef(null);
 
-  // Categories & Sets Data Structure
+  // Complete Categories & Sets Data Structure (90 Total Puzzles)
   const categories = [
     {
       id: 'movies',
@@ -120,6 +120,56 @@ export default function App() {
           ]
         }
       ]
+    },
+    {
+      id: 'cities',
+      name: 'WORLD CITIES',
+      emoji: '🏙️',
+      color: 'bg-mintGreen',
+      sets: [
+        {
+          id: 1,
+          name: 'Set 1: Global Landmarks',
+          puzzles: [
+            { id: 1, answer: "TOKYO", clue: "Bustling capital of Japan known for neon lights and skyscrapers.", funFact: "Tokyo is the most populous metropolitan area in the entire world, housing over 37 million people.", image: "/images/cities/set1/1.png" },
+            { id: 2, answer: "NEW DELHI", clue: "Historic capital city of India.", funFact: "It houses one of the world's largest spice markets, Khari Baoli, which has operated since the 17th century.", image: "/images/cities/set1/2.png" },
+            { id: 3, answer: "BALI", clue: "Famous Indonesian island paradise known for temples and beaches.", funFact: "Bali observes 'Nyepi' (Day of Silence) once a year where all lights, fires, and travel are completely prohibited.", image: "/images/cities/set1/3.png" },
+            { id: 4, answer: "SYDNEY", clue: "Australian coastal hub featuring a famous iconic opera house.", funFact: "The famous Sydney Opera House roof shells were inspired by the simple peeling segments of an ordinary orange.", image: "/images/cities/set1/4.png" },
+            { id: 5, answer: "MECCA", clue: "Holiest city in Islam located in Saudi Arabia.", funFact: "The towering Makkah Royal Clock Tower here is one of the tallest architectural structures on Earth.", image: "/images/cities/set1/5.png" },
+            { id: 6, answer: "INTERLAKEN", clue: "Swiss resort town nestled between scenic alpine lakes.", funFact: "Its name literally translates to 'between lakes' (Thun and Brienz).", image: "/images/cities/set1/6.png" },
+            { id: 7, answer: "BERLIN", clue: "Vibrant capital of Germany rich in modern history.", funFact: "Berlin has more bridges than Venice, boasting over 1,700 bridges across its waterways.", image: "/images/cities/set1/7.png" },
+            { id: 8, answer: "SAN FRANCISCO", clue: "Northern California city famous for its steep hills and cable cars.", funFact: "The iconic Golden Gate Bridge is officially painted in a distinct color shade known as 'International Orange'.", image: "/images/cities/set1/8.png" },
+            { id: 9, answer: "CAPE TOWN", clue: "Port city in South Africa beneath imposing Table Mountain.", funFact: "Table Mountain is estimated to be one of the oldest geological mountain formations in the world.", image: "/images/cities/set1/9.png" },
+            { id: 10, answer: "BARCELONA", clue: "Catalan coastal city known for unique Gaudí architecture.", funFact: "The famous Basílica de la Sagrada Família has been under construction continuously since 1882.", image: "/images/cities/set1/10.png" },
+            { id: 11, answer: "BRASILIA", clue: "Planned capital of Brazil shaped like an airplane from above.", funFact: "The entire city was built from scratch in just 41 months and inaugurated as capital in 1960.", image: "/images/cities/set1/11.png" },
+            { id: 12, answer: "KUALA LUMPUR", clue: "Malaysian capital dominated by the iconic Petronas Twin Towers.", funFact: "The Petronas Twin Towers were the tallest buildings in the world from 1998 to 2004.", image: "/images/cities/set1/12.png" },
+            { id: 13, answer: "CHENGDU", clue: "Sichuan capital famous for spicy cuisine and giant pandas.", funFact: "Chengdu is recognized globally as the home and major research breeding center for giant pandas.", image: "/images/cities/set1/13.png" },
+            { id: 14, answer: "CASABLANCA", clue: "Major Moroccan port city and economic hub.", funFact: "The Hassan II Mosque in Casablanca features the second-tallest minaret in the world and a laser pointing toward Mecca.", image: "/images/cities/set1/14.png" },
+            { id: 15, answer: "HONG KONG", clue: "Global financial powerhouse with a stunning vertical harbor skyline.", funFact: "Hong Kong has more skyscrapers than any other city in the entire world.", image: "/images/cities/set1/15.png" }
+          ]
+        },
+        {
+          id: 2,
+          name: 'Set 2: Wonders & Metropolises',
+          puzzles: [
+            { id: 1, answer: "NIAGARA FALLS", clue: "Thunderous roaring waterfalls spanning the US-Canada border.", funFact: "More than 3,160 tons of water flow over Niagara Falls every single second.", image: "/images/cities/set2/1.png" },
+            { id: 2, answer: "GIZA", clue: "Egyptian plateau home to the Great Pyramids and Sphinx.", funFact: "The Great Pyramid of Giza was the tallest man-made structure in the world for over 3,800 years.", image: "/images/cities/set2/2.png" },
+            { id: 3, answer: "MADRID", clue: "Sunny and vibrant capital city of Spain.", funFact: "Madrid's historic Restaurant Botín has operated continuously since 1725, making it the oldest restaurant in the world.", image: "/images/cities/set2/3.png" },
+            { id: 4, answer: "JERUSALEM", clue: "Ancient holy city revered by three major world religions.", funFact: "The ancient Old City of Jerusalem is divided into four distinct quarters: Armenian, Christian, Jewish, and Muslim.", image: "/images/cities/set2/4.png" },
+            { id: 5, answer: "FLORENCE", clue: "Italian birthplace of the Renaissance filled with art history.", funFact: "Florence was the first city in Europe to have its streets fully paved with stone in 1339.", image: "/images/cities/set2/5.png" },
+            { id: 6, answer: "MOSCOW", clue: "Sprawling capital of Russia featuring Red Square and St. Basil's.", funFact: "Moscow's metro system is famous for its stunning palaces-like stations decorated with chandeliers and marble statues.", image: "/images/cities/set2/6.png" },
+            { id: 7, answer: "HAVANA", clue: "Historic capital of Cuba known for vintage cars and colonial architecture.", funFact: "Havana's historic old town was designated a UNESCO World Heritage site in 1982.", image: "/images/cities/set2/7.png" },
+            { id: 8, answer: "MACAU", clue: "The bustling gaming and entertainment capital of Asia.", funFact: "Macau has one of the highest population densities in the entire world.", image: "/images/cities/set2/8.png" },
+            { id: 9, answer: "REYKJAVIK", clue: "The world's northernmost sovereign capital, located in Iceland.", funFact: "Most buildings in Reykjavik are heated by natural underground geothermal water piped directly from hot springs.", image: "/images/cities/set2/9.png" },
+            { id: 10, answer: "JAKARTA", clue: "Sprawling and energetic capital metropolis of Indonesia.", funFact: "Jakarta was historically known as 'Batavia' during the Dutch colonial era.", image: "/images/cities/set2/10.png" },
+            { id: 11, answer: "MIAMI", clue: "Sunny South Florida coastal hub known for art deco and beaches.", funFact: "Miami is the only major American city founded by a woman, Julia Tuttle, in 1896.", image: "/images/cities/set2/11.png" },
+            { id: 12, answer: "AMSTERDAM", clue: "Picturesque Dutch capital famous for its scenic canals and bicycles.", funFact: "There are more bicycles in Amsterdam than there are human residents.", image: "/images/cities/set2/12.png" },
+            { id: 13, answer: "SHANGHAI", clue: "Futuristic global financial hub in China featuring the Oriental Pearl Tower.", funFact: "Shanghai's maglev train reaches staggering operating speeds of up to 431 km/h (268 mph).", image: "/images/cities/set2/13.png" },
+            { id: 14, answer: "HIROSHIMA", clue: "Historic Japanese city known for peace monuments and resilience.", funFact: "The Peace Flame in Hiroshima Peace Memorial Park will remain lit continuously until all nuclear weapons on Earth are destroyed.", image: "/images/cities/set2/14.png" },
+            { id: 15, answer: "MANCHESTER", clue: "Industrial powerhouse and cultural capital in northern England.", funFact: "Manchester is widely credited as the birthplace of the industrial revolution and modern computing.", image: "/images/cities/set2/15.png" }
+          ]
+        }
+      ]
     }
   ];
 
@@ -174,9 +224,7 @@ export default function App() {
                 >
                   <div>
                     <div className="text-2xl">{cat.emoji} {cat.name}</div>
-                    <div className="text-xs opacity-90 font-bold mt-1">
-                      {cat.id === 'movies' ? 'Sets 1 & 2 Ready' : 'Sets 1 & 2 Ready!'}
-                    </div>
+                    <div className="text-xs opacity-90 font-bold mt-1">30 Puzzles Loaded (Sets 1 & 2)</div>
                   </div>
                   <span className="text-2xl">➡️</span>
                 </button>

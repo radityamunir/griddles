@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 
 export default function App() {
-  const [currentScreen, setCurrentScreen] = useState('home'); // 'home', 'sets', 'grid', 'game'
+  const [currentScreen, setCurrentScreen] = useState('home'); // 'home', 'grid', 'game'
   const [coins, setCoins] = useState(100);
   
   // Navigation & Game states
@@ -23,13 +23,13 @@ export default function App() {
   const categories = [
     {
       id: 'movies',
-      name: 'MOVIES & SERIES',
-      emoji: '🎬',
+      name: 'Movies',
+      emoji: '🍿',
       color: 'bg-candyPink',
       sets: [
         {
           id: 1,
-          name: 'Set 1: Blockbusters & Icons',
+          name: 'Set 01',
           puzzles: [
             { id: 1, answer: "FANTASTIC FOUR", clue: "Marvel's premier superhero family.", funFact: "Stan Lee and Jack Kirby created them in 1961 to rival DC's Justice League.", image: "/images/movies/set1/1.png" },
             { id: 2, answer: "INTERSTELLAR", clue: "Christopher Nolan's space-time bending epic.", funFact: "Theoretical physicist Kip Thorne served as an executive producer to ensure scientific accuracy.", image: "/images/movies/set1/2.png" },
@@ -50,7 +50,7 @@ export default function App() {
         },
         {
           id: 2,
-          name: 'Set 2: Cult Classics & Masterpieces',
+          name: 'Set 02',
           puzzles: [
             { id: 1, answer: "BLADE RUNNER 2049", clue: "Denis Villeneuve's neon-drenched cyberpunk sequel.", funFact: "Ryan Gosling actually really punched Harrison Ford in the face during a fight scene.", image: "/images/movies/set2/1.png" },
             { id: 2, answer: "INCEPTION", clue: "A dream within a dream within a dream.", funFact: "The spinning top symbol was inspired by a psychological concept explored in Greek philosophy.", image: "/images/movies/set2/2.png" },
@@ -73,13 +73,13 @@ export default function App() {
     },
     {
       id: 'people',
-      name: 'FAMOUS PEOPLE',
-      emoji: '🦸',
+      name: 'People',
+      emoji: '😎',
       color: 'bg-skyBlue',
       sets: [
         {
           id: 1,
-          name: 'Set 1: Icons & Legends',
+          name: 'Set 01',
           puzzles: [
             { id: 1, answer: "MICHAEL JACKSON", clue: "The King of Pop who popularized the moonwalk.", funFact: "Michael Jackson patented special gravity-leaning shoes used in his 'Smooth Criminal' live performances.", image: "/images/peoples/set1/1.png" },
             { id: 2, answer: "BRUNO MARS", clue: "Grammy-winning retro pop and funk hitmaker.", funFact: "He started his career as an Elvis Presley impersonator in Hawaii when he was just four years old.", image: "/images/peoples/set1/2.png" },
@@ -100,7 +100,7 @@ export default function App() {
         },
         {
           id: 2,
-          name: 'Set 2: History & Pop Culture',
+          name: 'Set 02',
           puzzles: [
             { id: 1, answer: "ALBERT EINSTEIN", clue: "Genius physicist with iconic hair and the theory of relativity.", funFact: "He was offered the presidency of Israel in 1952, but politely declined the position.", image: "/images/peoples/set2/1.png" },
             { id: 2, answer: "VAN GOGH", clue: "Post-impressionist Dutch painter of starry nights.", funFact: "During his entire lifetime, he only successfully sold a single painting titled 'The Red Vineyard'.", image: "/images/peoples/set2/2.png" },
@@ -123,13 +123,13 @@ export default function App() {
     },
     {
       id: 'cities',
-      name: 'WORLD CITIES',
-      emoji: '🏙️',
+      name: 'Cities',
+      emoji: '🗼',
       color: 'bg-mintGreen',
       sets: [
         {
           id: 1,
-          name: 'Set 1: Global Landmarks',
+          name: 'Set 01',
           puzzles: [
             { id: 1, answer: "TOKYO", clue: "Bustling capital of Japan known for neon lights and skyscrapers.", funFact: "Tokyo is the most populous metropolitan area in the entire world, housing over 37 million people.", image: "/images/cities/set1/1.png" },
             { id: 2, answer: "NEW DELHI", clue: "Historic capital city of India.", funFact: "It houses one of the world's largest spice markets, Khari Baoli, which has operated since the 17th century.", image: "/images/cities/set1/2.png" },
@@ -150,7 +150,7 @@ export default function App() {
         },
         {
           id: 2,
-          name: 'Set 2: Wonders & Metropolises',
+          name: 'Set 02',
           puzzles: [
             { id: 1, answer: "NIAGARA FALLS", clue: "Thunderous roaring waterfalls spanning the US-Canada border.", funFact: "More than 3,160 tons of water flow over Niagara Falls every single second.", image: "/images/cities/set2/1.png" },
             { id: 2, answer: "GIZA", clue: "Egyptian plateau home to the Great Pyramids and Sphinx.", funFact: "The Great Pyramid of Giza was the tallest man-made structure in the world for over 3,800 years.", image: "/images/cities/set2/2.png" },
@@ -173,8 +173,32 @@ export default function App() {
     }
   ];
 
+  // Default selected category & active set on home load
+  const activeCategory = selectedCategory || categories[0];
+  const activeSet = selectedSet || activeCategory.sets[0];
+
   // Helper key for solved mapping
   const getPuzzleKey = (catId, setId, puzzleId) => `${catId}-${setId}-${puzzleId}`;
+
+  // Calculate solved counts per category
+  const getCategorySolvedCount = (cat) => {
+    let count = 0;
+    cat.sets.forEach(set => {
+      set.puzzles.forEach(p => {
+        if (solvedPuzzles[getPuzzleKey(cat.id, set.id, p.id)]) count++;
+      });
+    });
+    return count;
+  };
+
+  // Calculate solved count per set
+  const getSetSolvedCount = (catId, setId, setPuzzles) => {
+    let count = 0;
+    setPuzzles.forEach(p => {
+      if (solvedPuzzles[getPuzzleKey(catId, setId, p.id)]) count++;
+    });
+    return count;
+  };
 
   // Handle native keyboard typing
   const handleInputChange = (e) => {
@@ -183,11 +207,10 @@ export default function App() {
     const rawInput = e.target.value.toUpperCase().replace(/[^A-Z]/g, '');
     
     if (rawInput.length <= cleanAnswer.length) {
-      const key = getPuzzleKey(selectedCategory.id, selectedSet.id, activePuzzle.id);
+      const key = getPuzzleKey(activeCategory.id, activeSet.id, activePuzzle.id);
       const newGuesses = { ...currentGuesses, [key]: rawInput };
       setCurrentGuesses(newGuesses);
 
-      // Check if word is complete and correct
       if (rawInput === cleanAnswer) {
         setSolvedPuzzles(prev => ({ ...prev, [key]: true }));
         setCoins(prev => prev + 10);
@@ -201,89 +224,141 @@ export default function App() {
       <div className="w-full sm:max-w-[390px] h-screen sm:h-[844px] bg-paper dot-grid border-4 border-ink shadow-2xl sm:rounded-3xl flex flex-col overflow-hidden relative">
         
         {/* Top Header */}
-        <div className="bg-electricYellow border-b-4 border-ink px-4 py-2.5 flex items-center justify-between shadow-cartoon-sm z-10 shrink-0">
-          <h1 className="font-black tracking-wider text-xl transform -rotate-1">GRIDDLES</h1>
-          <div className="bg-white border-2 border-ink px-3 py-0.5 rounded-full font-bold text-sm shadow-cartoon-sm flex items-center gap-1">
-            <span>🪙</span> {coins}
+        <div className="px-4 pt-4 pb-2 flex items-start justify-between shrink-0">
+          <div>
+            <div className="text-[10px] font-black tracking-widest text-slate-600 uppercase">Your Daily Pop Fix</div>
+            <h1 className="text-3xl font-black tracking-wider transform -rotate-1 mt-0.5">
+              <span className="bg-electricYellow px-2 py-0.5 border-2 border-ink inline-block shadow-cartoon-sm">GRIDDLES!</span>
+            </h1>
+          </div>
+          
+          <div className="flex flex-col items-end gap-1.5">
+            <div className="bg-white border-3 border-ink px-3 py-1 rounded-full font-black text-xs shadow-cartoon-sm flex items-center gap-1">
+              <span>⭐</span> {coins}
+            </div>
+            <div className="text-[10px] font-black text-right leading-tight">
+              ✨ Know it?<br/>Show it.
+            </div>
           </div>
         </div>
 
         {/* Screen Area */}
-        <div className="flex-1 overflow-y-auto p-3 flex flex-col relative">
+        <div className="flex-1 overflow-y-auto px-4 pb-4 flex flex-col relative">
           
-          {/* 1. HOME SCREEN */}
+          {/* HOME SCREEN */}
           {currentScreen === 'home' && (
-            <div className="space-y-4 flex-1 flex flex-col justify-center">
-              <h2 className="text-center font-black text-xl mb-2 tracking-wide">CHOOSE A CATEGORY</h2>
+            <div className="space-y-3 flex-1 flex flex-col">
               
-              {categories.map((cat) => (
-                <button 
-                  key={cat.id}
-                  onClick={() => { setSelectedCategory(cat); setCurrentScreen('sets'); }}
-                  className={`w-full ${cat.color} border-4 border-ink p-4 rounded-2xl shadow-cartoon font-black text-left flex justify-between items-center transform hover:-translate-y-1 transition-transform`}
-                >
-                  <div>
-                    <div className="text-2xl">{cat.emoji} {cat.name}</div>
-                    <div className="text-xs opacity-90 font-bold mt-1">30 Puzzles Loaded (Sets 1 & 2)</div>
-                  </div>
-                  <span className="text-2xl">➡️</span>
-                </button>
-              ))}
-            </div>
-          )}
-
-          {/* 2. SET SELECTION SCREEN */}
-          {currentScreen === 'sets' && selectedCategory && (
-            <div className="space-y-4 flex-1 flex flex-col">
-              <button 
-                onClick={() => setCurrentScreen('home')}
-                className="self-start bg-white border-2 border-ink px-3 py-1 rounded-xl font-bold text-sm shadow-cartoon-sm"
-              >
-                ⬅️ Back to Categories
-              </button>
-              
-              <div className="text-center my-2">
-                <span className="text-3xl">{selectedCategory.emoji}</span>
-                <h3 className="font-black text-xl mt-1">{selectedCategory.name}</h3>
-                <p className="text-xs font-bold opacity-70">Select a Set to Play</p>
+              <div className="flex justify-between items-center mt-1">
+                <h2 className="font-black text-base tracking-wide text-slate-800">Pick your playground</h2>
+                <span className="text-lg">〰️</span>
               </div>
+              
+              {/* Category Cards */}
+              <div className="space-y-3">
+                {categories.map((cat) => {
+                  const solvedCount = getCategorySolvedCount(cat);
+                  const isSelected = activeCategory.id === cat.id;
 
-              <div className="space-y-3 flex-1 flex flex-col justify-center">
-                {selectedCategory.sets.map((set) => (
-                  <button 
-                    key={set.id}
-                    onClick={() => { setSelectedSet(set); setCurrentScreen('grid'); }}
-                    className="w-full bg-white border-4 border-ink p-4 rounded-2xl shadow-cartoon font-black text-left flex justify-between items-center transform hover:-translate-y-1 transition-transform hover:bg-slate-50"
-                  >
-                    <div>
-                      <div className="text-lg">{set.name}</div>
-                      <div className="text-xs text-slate-500 font-bold mt-1">15 Puzzles Loaded</div>
+                  return (
+                    <div 
+                      key={cat.id}
+                      onClick={() => {
+                        setSelectedCategory(cat);
+                        setSelectedSet(cat.sets[0]); // Reset to set 1 when switching category
+                      }}
+                      className={`w-full ${cat.color} border-3 border-ink p-3.5 rounded-2xl shadow-cartoon cursor-pointer transition-transform active:translate-x-0.5 active:translate-y-0.5 relative ${
+                        isSelected ? 'ring-4 ring-electricYellow' : 'opacity-90 hover:opacity-100'
+                      }`}
+                    >
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-3">
+                          <div className="w-12 h-12 bg-white border-2 border-ink rounded-xl flex items-center justify-center text-2xl shadow-cartoon-sm shrink-0">
+                            {cat.emoji}
+                          </div>
+                          <div>
+                            <div className="font-black text-lg leading-tight">{cat.name}</div>
+                            <div className="text-xs font-bold text-slate-700 mt-0.5">{solvedCount} / 30 Solved</div>
+                          </div>
+                        </div>
+                        <div className="w-8 h-8 bg-white border-2 border-ink rounded-lg flex items-center justify-center font-black shadow-cartoon-sm">
+                          ↗
+                        </div>
+                      </div>
+
+                      {/* Mini Progress Bar */}
+                      <div className="mt-2.5 w-full bg-white/60 border-2 border-ink h-3 rounded-full overflow-hidden p-0.5">
+                        <div 
+                          className="bg-ink h-full rounded-full transition-all duration-500"
+                          style={{ width: `${(solvedCount / 30) * 100}%` }}
+                        />
+                      </div>
                     </div>
-                    <span className="text-2xl">🧩</span>
-                  </button>
-                ))}
+                  );
+                })}
               </div>
+
+              {/* Movie/Category Sets Section */}
+              <div className="mt-3 pt-2 border-t-2 border-dashed border-ink/30">
+                <div className="flex justify-between items-center mb-2">
+                  <span className="font-black text-xs uppercase tracking-wider text-slate-700">
+                    Your {activeCategory.name} Sets
+                  </span>
+                  <span className="text-[11px] font-bold text-slate-500">2 sets · 30 icons</span>
+                </div>
+
+                <div className="grid grid-cols-2 gap-2.5">
+                  {activeCategory.sets.map((set) => {
+                    const setSolved = getSetSolvedCount(activeCategory.id, set.id, set.puzzles);
+                    const isSetSelected = activeSet?.id === set.id;
+
+                    return (
+                      <button
+                        key={set.id}
+                        onClick={() => {
+                          setSelectedSet(set);
+                          setCurrentScreen('grid');
+                        }}
+                        className={`border-3 border-ink p-3 rounded-xl font-black text-left flex flex-col justify-between shadow-cartoon-sm transition-transform active:translate-x-0.5 active:translate-y-0.5 ${
+                          setSolved === 15 ? 'bg-mintGreen' : 'bg-electricYellow hover:bg-yellow-300'
+                        }`}
+                      >
+                        <div className="flex justify-between items-center">
+                          <span className="text-sm">{set.name}</span>
+                          <span className="text-xs">
+                            {setSolved === 15 ? '✓' : '→'}
+                          </span>
+                        </div>
+                        <div className="text-xs font-bold text-slate-800 mt-2">
+                          {setSolved} / 15 {setSolved === 15 ? '✓' : 'solved'}
+                        </div>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
             </div>
           )}
 
           {/* 3. 15-ICON SET GRID SCREEN */}
-          {currentScreen === 'grid' && selectedSet && (
-            <div className="space-y-4 flex-1 flex flex-col">
+          {currentScreen === 'grid' && activeSet && (
+            <div className="space-y-3 flex-1 flex flex-col">
               <button 
-                onClick={() => setCurrentScreen('sets')}
-                className="self-start bg-white border-2 border-ink px-3 py-1 rounded-xl font-bold text-sm shadow-cartoon-sm"
+                onClick={() => setCurrentScreen('home')}
+                className="self-start bg-white border-2 border-ink px-3 py-1 rounded-xl font-bold text-xs shadow-cartoon-sm"
               >
-                ⬅️ Back to Sets
+                ⬅️ Back to Home
               </button>
               
               <div className="text-center">
-                <h3 className="font-black text-lg">{selectedCategory.name}</h3>
-                <p className="text-xs font-bold text-slate-600">{selectedSet.name}</p>
+                <h3 className="font-black text-lg">{activeCategory.name}</h3>
+                <p className="text-xs font-bold text-slate-600">{activeSet.name} (15 Puzzles)</p>
               </div>
               
-              <div className="grid grid-cols-3 gap-3 overflow-y-auto pb-4">
-                {selectedSet.puzzles.map((puzzle) => {
-                  const key = getPuzzleKey(selectedCategory.id, selectedSet.id, puzzle.id);
+              <div className="grid grid-cols-3 gap-2.5 overflow-y-auto pb-4">
+                {activeSet.puzzles.map((puzzle) => {
+                  const key = getPuzzleKey(activeCategory.id, activeSet.id, puzzle.id);
                   const isSolved = solvedPuzzles[key];
 
                   return (
@@ -296,7 +371,7 @@ export default function App() {
                       className="aspect-square bg-white border-3 border-ink rounded-xl overflow-hidden relative shadow-cartoon-sm transition-transform active:translate-x-1 active:translate-y-1 group"
                     >
                       <img 
-                        src={puzzleImagePath(selectedCategory.id, selectedSet.id, puzzle.id)} 
+                        src={puzzleImagePath(activeCategory.id, activeSet.id, puzzle.id)} 
                         alt={`Puzzle #${puzzle.id}`}
                         className="w-full h-full object-cover"
                         onError={(e) => {
@@ -323,7 +398,7 @@ export default function App() {
 
           {/* 4. GUESSER GAMEPLAY SCREEN */}
           {currentScreen === 'game' && activePuzzle && (() => {
-            const key = getPuzzleKey(selectedCategory.id, selectedSet.id, activePuzzle.id);
+            const key = getPuzzleKey(activeCategory.id, activeSet.id, activePuzzle.id);
             const currentWord = currentGuesses[key] || "";
             let letterIndex = 0;
 
@@ -355,7 +430,7 @@ export default function App() {
                 {/* Compact Artwork Frame */}
                 <div className="w-36 h-36 mx-auto bg-white border-3 border-ink rounded-2xl shadow-cartoon overflow-hidden flex items-center justify-center shrink-0">
                   <img 
-                    src={puzzleImagePath(selectedCategory.id, selectedSet.id, activePuzzle.id)} 
+                    src={puzzleImagePath(activeCategory.id, activeSet.id, activePuzzle.id)} 
                     alt={`Puzzle #${activePuzzle.id}`}
                     className="w-full h-full object-cover"
                     onError={(e) => {

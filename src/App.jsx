@@ -181,6 +181,69 @@ export default function App() {
             { id: 14, answer: "SLASH", clue: "Legendary top-hat-wearing Guns N' Roses lead guitarist.", funFact: "His iconic top hat was originally bought at a store in Los Angeles just a day before his first major band gig.", image: "/images/peoples/set2/14.png" },
             { id: 15, answer: "STEVE HARVEY", clue: "Comedian and host famous for hosting Family Feud.", funFact: "Before achieving television fame, he spent three years living out of his 1976 Ford Tempo while working odd stand-up gigs.", image: "/images/peoples/set2/15.png" }
           ]
+        },
+        {
+          id: 3,
+          name: 'Set 03: Sports, Tech & Stage Icons',
+          puzzles: [
+            { id: 1, answer: "ERLING HAALAND", clue: "Prolific Norwegian striker known for scoring goals at a rapid pace.", funFact: "He holds youth and senior scoring records across multiple European leagues.", image: "/images/peoples/set3/1.png" },
+            { id: 2, answer: "STEPHEN CURRY", clue: "Sharpshooting NBA guard who transformed three-point shooting.", funFact: "He became the first unanimous MVP in NBA history in 2016.", image: "/images/peoples/set3/2.png" },
+            { id: 3, answer: "ELON MUSK", clue: "Entrepreneur behind electric vehicles and commercial rocketry.", funFact: "Helped lead ventures in spaceflight, electric cars, and neural interfaces.", image: "/images/peoples/set3/3.png" },
+            { id: 4, answer: "ROBERT DOWNEY JR", clue: "Actor famous for bringing Iron Man and Sherlock Holmes to life.", funFact: "His comeback performance in Iron Man helped launch the Marvel Cinematic Universe.", image: "/images/peoples/set3/4.png" },
+            { id: 5, answer: "MIKE TYSON", clue: "Youngest heavyweight boxing champion in history.", funFact: "Won the heavyweight title at age 20 with explosive power.", image: "/images/peoples/set3/5.png" },
+            { id: 6, answer: "ELVIS PRESLEY", clue: "The King of Rock and Roll from Memphis.", funFact: "His 1950s performances reshaped popular music and youth culture.", image: "/images/peoples/set3/6.png" },
+            { id: 7, answer: "SALVADOR DALI", clue: "Surrealist artist famous for melting clocks and distinctive mustache.", funFact: "Blended dreamlike imagery with meticulous academic painting technique.", image: "/images/peoples/set3/7.png" },
+            { id: 8, answer: "SHAKIRA", clue: "Colombian singer-songwriter known for global hits and dance.", funFact: "Has performed at multiple FIFA World Cup events across her career.", image: "/images/peoples/set3/8.png" },
+            { id: 9, answer: "BENJAMIN FRANKLIN", clue: "American founding father, inventor, and diplomat.", funFact: "Helped establish public libraries, postal systems, and lightning rod experiments.", image: "/images/peoples/set3/9.png" },
+            { id: 10, answer: "DAVID BOWIE", clue: "Chameleonic British musician known for theatrical personas.", funFact: "Frequently reinvented his sound and visual style from glam rock to electronic.", image: "/images/peoples/set3/10.png" },
+            { id: 11, answer: "WINSTON CHURCHILL", clue: "British wartime prime minister and Nobel laureate in literature.", funFact: "Delivered iconic speeches during World War II and was also an avid painter.", image: "/images/peoples/set3/11.png" },
+            { id: 12, answer: "FRANK SINATRA", clue: "Crooner and member of the Rat Pack.", funFact: "Recorded timeless standards like 'Fly Me to the Moon' and 'My Way'.", image: "/images/peoples/set3/12.png" },
+            { id: 13, answer: "JOHNNY DEPP", clue: "Actor known for eccentric roles like Captain Jack Sparrow.", funFact: "Collaborated frequently with director Tim Burton on stylized fantasy films.", image: "/images/peoples/set3/13.png" },
+            { id: 14, answer: "SARDAR PATEL", clue: "Key Indian statesman known as the Iron Man of India.", funFact: "Played a central role in integrating princely states into modern India.", image: "/images/peoples/set3/14.png" },
+            { id: 15, answer: "SNOOP DOGG", clue: "West Coast hip-hop icon with a laid-back persona.", funFact: "Has crossed over into mainstream television, cooking shows, and global events.", image: "/images/peoples/set3/15.png" }
+          ]
+        },
+        {
+          id: 4,
+          name: 'Set 04: Pioneers, Innovators & Stars',
+          puzzles: [
+            { id: 1, answer: "NEIL ARMSTRONG", clue: "First human to walk on the Moon during Apollo 11.", funFact: "Stepped onto the lunar surface on July 20, 1969.", image: "/images/peoples/set4/1.png" },
+            { id: 2, answer: "BUZZ ALDRIN", clue: "Apollo 11 lunar module pilot and second person on the Moon.", funFact: "Captured many of the most famous photographs from the Apollo 11 moonwalk.", image: "/images/peoples/set4/2.png" },
+            { id: 3, answer: "MICHAEL COLLINS", clue: "Apollo 11 command module pilot orbiting the Moon.", funFact: "Waited alone in lunar orbit while Armstrong and Aldrin walked on the surface.", image: "/images/peoples/set4/3.png" },
+            { id: 4, answer: "BILL GATES", clue: "Co-founder of Microsoft and global philanthropist.", funFact: "Helped popularize personal computer software in the late 20th century.", image: "/images/peoples/set4/4.png" },
+            { id: 5, answer: "YAO MING", clue: "Towering Chinese basketball center and NBA All-Star.", funFact: "Stood at 7 feet 6 inches tall and helped bridge basketball between China and the US.", image: "/images/peoples/set4/5.png" },
+            { id: 6, answer: "CHE GUEVARA", clue: "Major figure of the Cuban Revolution.", funFact: "His portrait became one of the most reproduced political images in the world.", image: "/images/peoples/set4/6.png" },
+            { id: 7, answer: "OZZY OSBOURNE", clue: "Heavy metal frontman dubbed the Prince of Darkness.", funFact: "Rose to fame with Black Sabbath before building a major solo rock career.", image: "/images/peoples/set4/7.png" },
+            { id: 8, answer: "LADY GAGA", clue: "Pop singer, songwriter, and Oscar-winning actress.", funFact: "Known for bold fashion eras, vocal range, and chart-topping pop albums.", image: "/images/peoples/set4/8.png" },
+            { id: 9, answer: "COCO CHANEL", clue: "French fashion designer who popularized modern women's silhouettes.", funFact: "Known for tweed suits, quilted bags, and timeless minimalist elegance.", image: "/images/peoples/set4/9.png" },
+            { id: 10, answer: "NIKOLA TESLA", clue: "Inventor and electrical engineer behind AC power systems.", funFact: "Pioneered alternating current induction motors and high-voltage experiments.", image: "/images/peoples/set4/10.png" },
+            { id: 11, answer: "SIA", clue: "Australian singer-songwriter known for powerful vocals and visual disguises.", funFact: "Wrote major hits for other artists alongside solo tracks like 'Chandelier'.", image: "/images/peoples/set4/11.png" },
+            { id: 12, answer: "JACKIE CHAN", clue: "Martial artist and actor famous for acrobatic stunts and comedy.", funFact: "Performed countless intricate stunts combining kung fu choreography with slapstick timing.", image: "/images/peoples/set4/12.png" },
+            { id: 13, answer: "MARK ZUCKERBERG", clue: "Co-founder and CEO of Facebook and Meta.", funFact: "Launched the social network from his college dorm room in 2004.", image: "/images/peoples/set4/13.png" },
+            { id: 14, answer: "EFREN REYES", clue: "Legendary Filipino billiards player known as 'The Magician'.", funFact: "Famous for creative trick shots and winning world pool championships.", image: "/images/peoples/set4/14.png" },
+            { id: 15, answer: "VALENTINO ROSSI", clue: "Multi-time MotoGP world champion motorcycle racer.", funFact: "Iconic for his number 46 and bright yellow racing gear.", image: "/images/peoples/set4/15.png" }
+          ]
+        },
+        {
+          id: 5,
+          name: 'Set 05: Champions, Creators & Icons',
+          puzzles: [
+            { id: 1, answer: "CRISTIANO RONALDO", clue: "Portuguese football superstar with record international goals.", funFact: "Has won top honors across multiple European leagues and international tournaments.", image: "/images/peoples/set5/1.png" },
+            { id: 2, answer: "KOBE BRYANT", clue: "Five-time NBA champion known as the Black Mamba.", funFact: "Spent his entire 20-season NBA career with the Los Angeles Lakers.", image: "/images/peoples/set5/2.png" },
+            { id: 3, answer: "BABE RUTH", clue: "Baseball legend who transformed home run hitting.", funFact: "Began his career as an elite pitcher before becoming baseball's premier slugger.", image: "/images/peoples/set5/3.png" },
+            { id: 4, answer: "KARL MARX", clue: "19th-century philosopher and economist behind Das Kapital.", funFact: "His writings deeply influenced modern political and economic theory.", image: "/images/peoples/set5/4.png" },
+            { id: 5, answer: "CONNOR MGCREGOR", clue: "Irish mixed martial artist and two-division UFC champion.", funFact: "Became one of the highest-drawing stars in combat sports history.", image: "/images/peoples/set5/5.png" },
+            { id: 6, answer: "BANKSY", clue: "Anonymous street artist and satirical muralist.", funFact: "Known for stenciled works with political and social commentary worldwide.", image: "/images/peoples/set5/6.png" },
+            { id: 7, answer: "MRBEAST", clue: "Digital creator famous for high-budget challenges and philanthropy.", funFact: "Known for large-scale stunts, giveaways, and charity initiatives online.", image: "/images/peoples/set5/7.png" },
+            { id: 8, answer: "STEVIE WONDER", clue: "Soul and R&B legend and multi-instrumentalist.", funFact: "Signed with Motown as a child prodigy and won dozens of Grammy Awards.", image: "/images/peoples/set5/8.png" },
+            { id: 9, answer: "ALEXANDER GRAHAM BELL", clue: "Inventor closely associated with the practical telephone.", funFact: "Conducted early acoustic experiments and founded major telecommunications ventures.", image: "/images/peoples/set5/9.png" },
+            { id: 10, answer: "JK ROWLING", clue: "Author behind the global Harry Potter book series.", funFact: "Created the wizarding school saga that became a worldwide publishing phenomenon.", image: "/images/peoples/set5/10.png" },
+            { id: 11, answer: "LEONARD NIMOY", clue: "Actor famous for portraying Spock in Star Trek.", funFact: "Helped shape the logical Vulcan greeting and hand gesture.", image: "/images/peoples/set5/11.png" },
+            { id: 12, answer: "OLIVIA RODRIGO", clue: "Grammy-winning pop and alternative singer-songwriter.", funFact: "Broke streaming records with her debut single 'Drivers License'.", image: "/images/peoples/set5/12.png" },
+            { id: 13, answer: "JIM CARREY", clue: "Elastic physical comedian and dramatic actor.", funFact: "Known for expressive comedic roles as well as dramatic performances.", image: "/images/peoples/set5/13.png" },
+            { id: 14, answer: "JEFF BEZOS", clue: "Founder of Amazon and space company Blue Origin.", funFact: "Started Amazon as an online bookstore in the mid-1990s.", image: "/images/peoples/set5/14.png" },
+            { id: 15, answer: "NILE RODGERS", clue: "Guitarist, songwriter, and producer behind Chic and countless hits.", funFact: "Co-wrote and produced landmark dance, pop, and funk tracks across decades.", image: "/images/peoples/set5/15.png" }
+          ]
         }
       ]
     },

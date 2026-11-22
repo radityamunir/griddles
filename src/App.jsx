@@ -25,7 +25,7 @@ export default function App() {
       id: 'movies',
       name: 'Movies & Series',
       emoji: '🍿',
-      color: 'bg-candyPink',
+      toneClass: 'gr-card-pink',
       sets: [
         {
           id: 1,
@@ -138,7 +138,7 @@ export default function App() {
       id: 'people',
       name: 'Famous People',
       emoji: '😎',
-      color: 'bg-skyBlue',
+      toneClass: 'gr-card-blue',
       sets: [
         {
           id: 1,
@@ -251,7 +251,7 @@ export default function App() {
       id: 'cities',
       name: 'World Cities',
       emoji: '🗼',
-      color: 'bg-mintGreen',
+      toneClass: 'gr-card-mint',
       sets: [
         {
           id: 1,
@@ -344,121 +344,371 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 flex items-center justify-center p-0 sm:py-6">
-      <div className="w-full sm:max-w-[390px] h-screen sm:h-[844px] bg-paper dot-grid border-4 border-ink shadow-2xl sm:rounded-3xl flex flex-col overflow-hidden relative">
+    <div className="gr-viewport">
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900;1000&display=swap');
 
-        {/* Top Header */}
-        <div className="px-4 pt-4 pb-2 flex items-start justify-between shrink-0">
-          <div>
-            <div className="text-[10px] font-black tracking-widest text-slate-600 uppercase">Your Daily Pop Fix</div>
-            <h1 className="text-3xl font-black tracking-wider transform -rotate-1 mt-0.5">
-              <span className="bg-electricYellow px-2 py-0.5 border-2 border-ink inline-block shadow-cartoon-sm">GRIDDLES!</span>
-            </h1>
-          </div>
+        .gr-viewport {
+          --gr-ink: #1e293b;
+          --gr-paper: #fafaf9;
+          --gr-pink: #ff82ae;
+          --gr-blue: #82d5ff;
+          --gr-mint: #9ce9c0;
+          --gr-yellow: #ffe56b;
+          min-height: 100vh;
+          background: #e8e9e5;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 0;
+          font-family: "Nunito", sans-serif;
+          color: var(--gr-ink);
+        }
 
-          <div className="flex flex-col items-end gap-1.5">
-            <div className="bg-white border-3 border-ink px-3 py-1 rounded-full font-black text-xs shadow-cartoon-sm flex items-center gap-1">
-              <span>⭐</span> {coins}
+        @media (min-width: 640px) {
+          .gr-viewport {
+            padding: 28px 16px;
+          }
+        }
+
+        .gr-phone {
+          width: 100%;
+          max-width: 390px;
+          height: 100vh;
+          max-height: 844px;
+          position: relative;
+          overflow: hidden;
+          display: flex;
+          flex-direction: column;
+          border: 3px solid var(--gr-ink);
+          background-color: var(--gr-paper);
+          background-image: radial-gradient(#d9dce0 1px, transparent 1px);
+          background-size: 19px 19px;
+          box-shadow: 7px 8px 0 var(--gr-ink);
+        }
+
+        @media (min-width: 640px) {
+          .gr-phone {
+            height: 844px;
+            border-radius: 36px;
+          }
+        }
+
+        .gr-inner {
+          flex: 1;
+          min-height: 0;
+          padding: 24px 22px 20px;
+          display: flex;
+          flex-direction: column;
+          overflow-y: auto;
+        }
+
+        .gr-eyebrow {
+          font-size: 11px;
+          font-weight: 1000;
+          letter-spacing: 2px;
+          text-transform: uppercase;
+          color: #64748b;
+        }
+
+        .gr-coin-pill {
+          border: 3px solid var(--gr-ink);
+          border-radius: 100px;
+          background: #fff;
+          box-shadow: 3px 4px 0 var(--gr-ink);
+          padding: 5px 11px;
+          font-weight: 1000;
+          font-size: 14px;
+          transform: rotate(2deg);
+          display: inline-flex;
+          align-items: center;
+          gap: 5px;
+          white-space: nowrap;
+        }
+
+        .gr-coin-dot {
+          display: inline-grid;
+          place-items: center;
+          background: var(--gr-yellow);
+          border: 2px solid var(--gr-ink);
+          border-radius: 50%;
+          width: 21px;
+          height: 21px;
+          font-size: 11px;
+        }
+
+        .gr-brand-title {
+          position: relative;
+          margin: 14px 0 4px;
+          font-size: 46px;
+          font-weight: 1000;
+          letter-spacing: -2.4px;
+          line-height: 0.95;
+          transform: rotate(-2deg);
+          z-index: 0;
+          display: inline-block;
+        }
+
+        .gr-brand-title::after {
+          content: "";
+          position: absolute;
+          width: 104%;
+          height: 13px;
+          background: var(--gr-yellow);
+          bottom: 1px;
+          left: -2%;
+          transform: rotate(-1.5deg);
+          z-index: -1;
+          border-radius: 50% 30% 45% 20%;
+        }
+
+        .gr-squiggle {
+          color: #ff789f;
+          font-size: 26px;
+          font-weight: 1000;
+          letter-spacing: 3px;
+          line-height: 1;
+        }
+
+        .gr-cat-card {
+          width: 100%;
+          min-height: 112px;
+          border: 3px solid var(--gr-ink);
+          border-radius: 23px;
+          background: #fff;
+          box-shadow: 4px 4px 0 var(--gr-ink);
+          display: flex;
+          align-items: center;
+          text-align: left;
+          padding: 13px 16px;
+          gap: 14px;
+          transition: transform 0.12s, box-shadow 0.12s;
+          cursor: pointer;
+          color: var(--gr-ink);
+        }
+
+        .gr-cat-card:hover,
+        .gr-tile:hover,
+        .gr-back:hover,
+        .gr-set-card:hover,
+        .gr-action-btn:hover {
+          transform: translate(-1px, -2px);
+        }
+
+        .gr-cat-card:active,
+        .gr-tile:active,
+        .gr-back:active,
+        .gr-set-card:active,
+        .gr-action-btn:active {
+          transform: translate(4px, 4px);
+          box-shadow: 0 0 0 var(--gr-ink);
+        }
+
+        .gr-card-pink { background: #fff1f6; }
+        .gr-card-blue { background: #edf9ff; }
+        .gr-card-mint { background: #ecfff3; }
+
+        .gr-doodle {
+          width: 68px;
+          height: 68px;
+          flex: none;
+          border: 3px solid var(--gr-ink);
+          border-radius: 20px;
+          display: grid;
+          place-items: center;
+          font-size: 34px;
+          transform: rotate(-7deg);
+          box-shadow: 3px 3px 0 var(--gr-ink);
+        }
+
+        .gr-card-pink .gr-doodle { background: var(--gr-pink); }
+        .gr-card-blue .gr-doodle { background: var(--gr-blue); }
+        .gr-card-mint .gr-doodle { background: var(--gr-mint); }
+
+        .gr-back {
+          height: 40px;
+          padding: 0 12px;
+          border: 3px solid var(--gr-ink);
+          border-radius: 15px;
+          background: #fff;
+          box-shadow: 3px 3px 0 var(--gr-ink);
+          font-size: 13px;
+          font-weight: 900;
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          transition: transform 0.12s, box-shadow 0.12s;
+          cursor: pointer;
+          color: var(--gr-ink);
+        }
+
+        .gr-set-card {
+          width: 100%;
+          border: 3px solid var(--gr-ink);
+          border-radius: 20px;
+          box-shadow: 4px 4px 0 var(--gr-ink);
+          padding: 13px 15px;
+          font-weight: 900;
+          text-align: left;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          transition: transform 0.12s, box-shadow 0.12s;
+          cursor: pointer;
+          color: var(--gr-ink);
+        }
+
+        .gr-tile {
+          aspect-ratio: 1 / 1;
+          min-width: 0;
+          border: 3px solid var(--gr-ink);
+          border-radius: 16px;
+          background: #fff;
+          box-shadow: 3px 3px 0 var(--gr-ink);
+          overflow: hidden;
+          position: relative;
+          transition: transform 0.12s, box-shadow 0.12s;
+          cursor: pointer;
+          padding: 0;
+        }
+
+        .gr-action-btn {
+          width: 100%;
+          background: var(--gr-yellow);
+          border: 3px solid var(--gr-ink);
+          border-radius: 16px;
+          box-shadow: 4px 4px 0 var(--gr-ink);
+          padding: 12px 16px;
+          font-weight: 1000;
+          font-size: 14px;
+          cursor: pointer;
+          color: var(--gr-ink);
+          transition: transform 0.12s, box-shadow 0.12s;
+        }
+      `}</style>
+
+      <div className="gr-phone">
+        <div className="gr-inner">
+
+          {/* Top Header */}
+          <div className="flex items-start justify-between shrink-0 pb-2">
+            <div>
+              <div className="gr-eyebrow">Your Daily Pop Fix</div>
+              <h1 className="gr-brand-title">GRIDDLES!</h1>
             </div>
-            <div className="text-[10px] font-black text-right leading-tight">
-              ✨ Know it?<br />Show it.
+
+            <div className="flex flex-col items-end gap-1.5">
+              <div className="gr-coin-pill">
+                <span className="gr-coin-dot">🪙</span>
+                <span>{coins}</span>
+              </div>
+              <div className="text-[11px] font-black text-right leading-tight text-[#526070]">
+                ✨ Know it?<br />Show it.
+              </div>
             </div>
           </div>
-        </div>
-
-        {/* Screen Area */}
-        <div className="flex-1 overflow-y-auto px-4 pb-4 flex flex-col relative">
 
           {/* 1. HOME SCREEN (Category Choice) */}
           {currentScreen === 'home' && (
-            <div className="space-y-3.5 flex-1 flex flex-col justify-center">
-              <div className="flex justify-between items-center mb-1">
-                <h2 className="font-black text-base tracking-wide text-slate-800">Pick your playground</h2>
-                <span className="text-lg">〰️</span>
-              </div>
+            <div className="flex-1 flex flex-col justify-between pt-2">
+              <div>
+                <div className="flex items-center justify-between mb-3">
+                  <h2 className="text-[18px] font-black tracking-tight m-0">Pick your playground</h2>
+                  <span className="gr-squiggle" aria-hidden="true">~ ~</span>
+                </div>
 
-              <div className="space-y-3">
-                {categories.map((cat) => {
-                  const { total, solved } = getCategoryStats(cat);
-                  const progressPercent = total > 0 ? (solved / total) * 100 : 0;
+                <div className="grid gap-3.5">
+                  {categories.map((cat) => {
+                    const { total, solved } = getCategoryStats(cat);
+                    const progressPercent = total > 0 ? (solved / total) * 100 : 0;
 
-                  return (
-                    <button
-                      key={cat.id}
-                      onClick={() => {
-                        setSelectedCategory(cat);
-                        setCurrentScreen('sets');
-                      }}
-                      className={`w-full ${cat.color} border-3 border-ink p-4 rounded-2xl shadow-cartoon cursor-pointer text-left transition-transform active:translate-x-0.5 active:translate-y-0.5 hover:opacity-100 opacity-95 relative`}
-                    >
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-3.5">
-                          <div className="w-12 h-12 bg-white border-2 border-ink rounded-xl flex items-center justify-center text-2xl shadow-cartoon-sm shrink-0">
-                            {cat.emoji}
+                    return (
+                      <button
+                        key={cat.id}
+                        type="button"
+                        onClick={() => {
+                          setSelectedCategory(cat);
+                          setCurrentScreen('sets');
+                        }}
+                        className={`gr-cat-card ${cat.toneClass}`}
+                      >
+                        <div className="gr-doodle">{cat.emoji}</div>
+                        <div className="flex-1 min-w-0">
+                          <div className="text-[20px] font-black leading-tight truncate">{cat.name}</div>
+                          <div className="text-xs font-extrabold text-[#556475] mt-0.5">
+                            {solved} / {total} Solved · {cat.sets.length} Sets
                           </div>
-                          <div>
-                            <div className="font-black text-lg leading-tight">{cat.name}</div>
-                            <div className="text-xs font-bold text-slate-700 mt-0.5">{solved} / {total} Solved</div>
+                          <div className="mt-2 w-full bg-white/75 border-2 border-[#1e293b] h-2.5 rounded-full overflow-hidden p-[1px]">
+                            <div
+                              className="bg-[#1e293b] h-full rounded-full transition-all duration-300"
+                              style={{ width: `${progressPercent}%` }}
+                            />
                           </div>
                         </div>
-                        <div className="w-8 h-8 bg-white border-2 border-ink rounded-lg flex items-center justify-center font-black shadow-cartoon-sm">
+                        <div className="w-8 h-8 bg-white border-2 border-[#1e293b] rounded-xl flex items-center justify-center font-black text-base shadow-[2px_2px_0_#1e293b] shrink-0">
                           ↗
                         </div>
-                      </div>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
 
-                      {/* Progress Bar */}
-                      <div className="mt-3 w-full bg-white/60 border-2 border-ink h-3 rounded-full overflow-hidden p-0.5">
-                        <div
-                          className="bg-ink h-full rounded-full transition-all duration-500"
-                          style={{ width: `${progressPercent}%` }}
-                        />
-                      </div>
-                    </button>
-                  );
-                })}
+              <div className="pt-4 text-center text-xs font-black text-[#697586]">
+                Tap a category to pick your set
               </div>
             </div>
           )}
 
           {/* 2. SET CHOICE SCREEN */}
           {currentScreen === 'sets' && selectedCategory && (
-            <div className="space-y-3 flex-1 flex flex-col">
-              <button
-                onClick={() => setCurrentScreen('home')}
-                className="self-start bg-white border-2 border-ink px-3 py-1 rounded-xl font-bold text-xs shadow-cartoon-sm"
-              >
-                ⬅️ Back to Categories
-              </button>
-
-              <div className="text-center my-0.5">
-                <span className="text-3xl">{selectedCategory.emoji}</span>
-                <h3 className="font-black text-xl mt-0.5">{selectedCategory.name}</h3>
-                <p className="text-xs font-bold text-slate-600">Select a Set to Play</p>
+            <div className="flex-1 flex flex-col pt-1">
+              <div className="flex items-center justify-between mb-3">
+                <button
+                  type="button"
+                  onClick={() => setCurrentScreen('home')}
+                  className="gr-back"
+                >
+                  <span>←</span>
+                  <span>Categories</span>
+                </button>
+                <span className="text-[11px] font-black uppercase tracking-wider text-[#64748b]">
+                  {selectedCategory.sets.length} Sets
+                </span>
               </div>
 
-              <div className="space-y-2.5 flex-1 flex flex-col justify-center pb-4 overflow-y-auto">
+              <div className="text-center mb-3">
+                <div className="inline-flex items-center gap-2 bg-white border-3 border-[#1e293b] px-4 py-1.5 rounded-2xl shadow-[3px_3px_0_#1e293b]">
+                  <span className="text-2xl">{selectedCategory.emoji}</span>
+                  <h3 className="font-black text-lg m-0">{selectedCategory.name}</h3>
+                </div>
+                <p className="text-xs font-extrabold text-[#64748b] mt-2 mb-0">Choose a set to open its 15 puzzles</p>
+              </div>
+
+              <div className="space-y-2.5 flex-1 flex flex-col justify-center pb-2">
                 {selectedCategory.sets.map((set) => {
                   const setSolved = getSetSolvedCount(selectedCategory.id, set.id, set.puzzles);
                   const setTotal = set.puzzles.length;
+                  const isComplete = setSolved === setTotal;
 
                   return (
                     <button
                       key={set.id}
+                      type="button"
                       onClick={() => {
                         setSelectedSet(set);
                         setCurrentScreen('grid');
                       }}
-                      className={`w-full border-3 border-ink p-3 rounded-2xl font-black text-left flex justify-between items-center shadow-cartoon transition-transform active:translate-x-0.5 active:translate-y-0.5 shrink-0 ${
-                        setSolved === setTotal ? 'bg-mintGreen' : 'bg-electricYellow hover:bg-yellow-300'
-                      }`}
+                      className="gr-set-card"
+                      style={{ background: isComplete ? '#9ce9c0' : '#ffe56b' }}
                     >
-                      <div>
-                        <div className="text-sm">{set.name}</div>
-                        <div className="text-[11px] font-bold text-slate-700 mt-0.5">{setTotal} Puzzles Available</div>
+                      <div className="min-w-0 pr-2">
+                        <div className="text-sm font-black truncate">{set.name}</div>
+                        <div className="text-[11px] font-extrabold text-[#334155] mt-0.5">{setTotal} Puzzles</div>
                       </div>
-                      <div className="flex items-center gap-1.5 bg-white border-2 border-ink px-2.5 py-1 rounded-xl shadow-cartoon-sm text-xs shrink-0">
+                      <div className="flex items-center gap-1.5 bg-white border-2 border-[#1e293b] px-3 py-1 rounded-xl shadow-[2px_2px_0_#1e293b] text-xs font-black shrink-0">
                         <span>{setSolved} / {setTotal}</span>
-                        <span>{setSolved === setTotal ? '✓' : '→'}</span>
+                        <span>{isComplete ? '✓' : '→'}</span>
                       </div>
                     </button>
                   );
@@ -469,20 +719,27 @@ export default function App() {
 
           {/* 3. 15-ICON SET GRID SCREEN */}
           {currentScreen === 'grid' && selectedSet && selectedCategory && (
-            <div className="space-y-3 flex-1 flex flex-col">
-              <button
-                onClick={() => setCurrentScreen('sets')}
-                className="self-start bg-white border-2 border-ink px-3 py-1 rounded-xl font-bold text-xs shadow-cartoon-sm"
-              >
-                ⬅️ Back to Sets
-              </button>
-
-              <div className="text-center">
-                <h3 className="font-black text-lg">{selectedCategory.name}</h3>
-                <p className="text-xs font-bold text-slate-600">{selectedSet.name}</p>
+            <div className="flex-1 flex flex-col pt-1">
+              <div className="flex items-center justify-between mb-2.5">
+                <button
+                  type="button"
+                  onClick={() => setCurrentScreen('sets')}
+                  className="gr-back"
+                >
+                  <span>←</span>
+                  <span>Sets</span>
+                </button>
+                <span className="text-[11px] font-black uppercase tracking-wider text-[#64748b]">
+                  {getSetSolvedCount(selectedCategory.id, selectedSet.id, selectedSet.puzzles)} / {selectedSet.puzzles.length} Solved
+                </span>
               </div>
 
-              <div className="grid grid-cols-3 gap-2.5 overflow-y-auto pb-4">
+              <div className="mb-3">
+                <h3 className="font-black text-xl leading-tight m-0">{selectedSet.name}</h3>
+                <p className="text-xs font-extrabold text-[#64748b] mt-0.5 mb-0">{selectedCategory.name}</p>
+              </div>
+
+              <div className="grid grid-cols-3 gap-2.5 overflow-y-auto pb-3">
                 {selectedSet.puzzles.map((puzzle) => {
                   const key = getPuzzleKey(selectedCategory.id, selectedSet.id, puzzle.id);
                   const isSolved = solvedPuzzles[key];
@@ -490,11 +747,12 @@ export default function App() {
                   return (
                     <button
                       key={puzzle.id}
+                      type="button"
                       onClick={() => {
                         setActivePuzzle(puzzle);
                         setCurrentScreen('game');
                       }}
-                      className="aspect-square bg-white border-3 border-ink rounded-xl overflow-hidden relative shadow-cartoon-sm transition-transform active:translate-x-1 active:translate-y-1 group"
+                      className="gr-tile"
                     >
                       <img
                         src={puzzleImagePath(selectedCategory.id, selectedSet.id, puzzle.id)}
@@ -505,14 +763,16 @@ export default function App() {
                         }}
                       />
 
-                      <div className="absolute top-1 left-1 bg-black/60 text-white text-[10px] font-black px-1.5 py-0.5 rounded-md backdrop-blur-xs">
+                      <div className="absolute top-1.5 left-1.5 bg-[#1e293b] text-white text-[10px] font-black px-1.5 py-0.5 rounded-md border border-white/40">
                         #{puzzle.id}
                       </div>
 
                       {isSolved && (
-                        <div className="absolute inset-0 bg-mintGreen/30 backdrop-blur-[1px] flex flex-col items-center justify-center">
-                          <span className="text-xl">✅</span>
-                          <span className="text-[9px] font-black bg-white border border-ink px-1 rounded shadow-xs mt-0.5">💡 Fact</span>
+                        <div className="absolute inset-0 bg-[#9ce9c0]/45 backdrop-blur-[1px] flex flex-col items-center justify-center">
+                          <span className="text-xl drop-shadow">✅</span>
+                          <span className="text-[9px] font-black bg-white border-2 border-[#1e293b] px-1.5 py-0.5 rounded-md shadow-[2px_2px_0_#1e293b] mt-0.5">
+                            Fact
+                          </span>
                         </div>
                       )}
                     </button>
@@ -529,7 +789,7 @@ export default function App() {
             let letterIndex = 0;
 
             return (
-              <div className="space-y-2.5 flex-1 flex flex-col justify-start">
+              <div className="space-y-3 flex-1 flex flex-col justify-start pt-1">
 
                 {/* Hidden native input */}
                 <input
@@ -543,18 +803,20 @@ export default function App() {
                 {/* Top Navigation */}
                 <div className="flex justify-between items-center shrink-0">
                   <button
+                    type="button"
                     onClick={() => setCurrentScreen('grid')}
-                    className="bg-white border-2 border-ink px-3 py-0.5 rounded-xl font-bold text-xs shadow-cartoon-sm"
+                    className="gr-back"
                   >
-                    ⬅️ Back to Grid
+                    <span>←</span>
+                    <span>Grid</span>
                   </button>
-                  <span className="font-black text-xs bg-electricYellow border-2 border-ink px-2 py-0.5 rounded-lg">
+                  <span className="font-black text-xs bg-[#ffe56b] border-3 border-[#1e293b] px-3 py-1 rounded-xl shadow-[3px_3px_0_#1e293b]">
                     PUZZLE #{activePuzzle.id}
                   </span>
                 </div>
 
                 {/* Compact Artwork Frame */}
-                <div className="w-36 h-36 mx-auto bg-white border-3 border-ink rounded-2xl shadow-cartoon overflow-hidden flex items-center justify-center shrink-0">
+                <div className="w-40 h-40 mx-auto bg-white border-3 border-[#1e293b] rounded-3xl shadow-[4px_4px_0_#1e293b] overflow-hidden flex items-center justify-center shrink-0">
                   <img
                     src={puzzleImagePath(selectedCategory.id, selectedSet.id, activePuzzle.id)}
                     alt={`Puzzle #${activePuzzle.id}`}
@@ -566,8 +828,8 @@ export default function App() {
                 </div>
 
                 {/* Clue Text */}
-                <div className="bg-amber-100 border-2 border-ink px-3 py-1.5 rounded-xl text-center text-xs font-bold shadow-cartoon-sm shrink-0">
-                  💡 Clue: {activePuzzle.clue}
+                <div className="bg-white border-3 border-[#1e293b] px-3.5 py-2.5 rounded-2xl text-center text-xs font-extrabold shadow-[3px_3px_0_#1e293b] shrink-0">
+                  💡 {activePuzzle.clue}
                 </div>
 
                 {/* Interactive Answer Boxes */}
@@ -575,7 +837,7 @@ export default function App() {
                   onClick={() => {
                     if (inputRef.current) inputRef.current.focus();
                   }}
-                  className="bg-slate-100/80 border-2 border-dashed border-ink p-2.5 rounded-2xl flex flex-col items-center gap-1.5 cursor-pointer hover:bg-slate-200/50 transition-colors shadow-cartoon-sm shrink-0"
+                  className="bg-white/90 border-3 border-dashed border-[#1e293b] p-3 rounded-2xl flex flex-col items-center gap-2 cursor-pointer hover:bg-white transition-colors shadow-[3px_3px_0_#1e293b] shrink-0"
                 >
                   <div className="flex justify-center gap-1 flex-wrap items-center">
                     {activePuzzle.answer.split('').map((char, idx) => {
@@ -587,13 +849,16 @@ export default function App() {
                       letterIndex++;
 
                       return (
-                        <div key={idx} className="w-6 h-8 bg-white border-2 border-ink rounded-lg flex items-center justify-center font-black text-sm shadow-cartoon-sm">
+                        <div
+                          key={idx}
+                          className="w-6 h-8 bg-[#fafaf9] border-2 border-[#1e293b] rounded-lg flex items-center justify-center font-black text-sm shadow-[2px_2px_0_#1e293b]"
+                        >
                           {currentChar}
                         </div>
                       );
                     })}
                   </div>
-                  <span className="text-[9px] font-black text-slate-500 uppercase tracking-wider">
+                  <span className="text-[10px] font-black text-[#64748b] uppercase tracking-wider">
                     👆 Tap here to type answer
                   </span>
                 </div>
@@ -604,35 +869,37 @@ export default function App() {
 
           {/* WIN & FUN FACT MODAL */}
           {showWinModal && activePuzzle && (
-            <div className="absolute inset-0 bg-slate-900/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-              <div className="bg-paper border-4 border-ink p-6 rounded-3xl shadow-cartoon w-full max-w-xs space-y-4 text-center animate-bounce-once">
+            <div className="absolute inset-0 bg-[#1e293b]/80 backdrop-blur-xs z-50 flex items-center justify-center p-4">
+              <div className="bg-[#fafaf9] border-3 border-[#1e293b] p-5 rounded-3xl shadow-[6px_6px_0_#1e293b] w-full max-w-xs space-y-3.5 text-center">
                 <div className="text-4xl">🎉</div>
-                <h3 className="font-black text-xl">CORRECT!</h3>
-                <p className="font-bold text-sm text-slate-700">You solved <span className="underline">{activePuzzle.answer}</span>!</p>
+                <h3 className="font-black text-xl m-0">CORRECT!</h3>
+                <p className="font-extrabold text-sm text-[#334155] m-0">
+                  You solved <span className="underline">{activePuzzle.answer}</span>!
+                </p>
 
                 {/* Fun Fact Card */}
-                <div className="bg-amber-100 border-3 border-ink p-3 rounded-2xl shadow-cartoon-sm text-left">
-                  <div className="font-black text-xs text-amber-800 mb-1">🧠 FUN FACT:</div>
-                  <p className="text-xs font-bold leading-relaxed">{activePuzzle.funFact}</p>
+                <div className="bg-[#fff1f6] border-3 border-[#1e293b] p-3 rounded-2xl shadow-[3px_3px_0_#1e293b] text-left">
+                  <div className="font-black text-xs text-[#1e293b] mb-1">🧠 FUN FACT:</div>
+                  <p className="text-xs font-bold leading-relaxed m-0 text-[#334155]">{activePuzzle.funFact}</p>
                 </div>
 
-                <div className="text-xs font-black text-emerald-600">+10 Coins Earned! 🪙</div>
+                <div className="text-xs font-black text-emerald-700">+10 Coins Earned! 🪙</div>
 
                 <button
+                  type="button"
                   onClick={() => {
                     setShowWinModal(false);
                     setCurrentScreen('grid');
                   }}
-                  className="w-full bg-electricYellow border-3 border-ink py-3 rounded-xl font-black text-sm shadow-cartoon active:translate-x-0.5 active:translate-y-0.5"
+                  className="gr-action-btn"
                 >
-                  CONTINUE ➡️
+                  CONTINUE →
                 </button>
               </div>
             </div>
           )}
 
         </div>
-
       </div>
     </div>
   );

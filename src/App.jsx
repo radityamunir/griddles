@@ -3,23 +3,23 @@ import React, { useState, useRef } from 'react';
 export default function App() {
   const [currentScreen, setCurrentScreen] = useState('home'); // 'home', 'sets', 'grid', 'game'
   const [coins, setCoins] = useState(100);
-  
+
   // Navigation & Game states
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedSet, setSelectedSet] = useState(null);
   const [activePuzzle, setActivePuzzle] = useState(null);
-  
+
   // Track solved puzzles
   const [solvedPuzzles, setSolvedPuzzles] = useState({});
-  
+
   // Gameplay input states
   const [currentGuesses, setCurrentGuesses] = useState({});
   const [showWinModal, setShowWinModal] = useState(false);
-  
+
   // Ref for hidden input
   const inputRef = useRef(null);
 
-  // Complete Categories & Sets Data Structure (90 Total Puzzles)
+  // Complete Categories & Sets Data Structure
   const categories = [
     {
       id: 'movies',
@@ -67,6 +67,69 @@ export default function App() {
             { id: 13, answer: "DUMB AND DUMBER", clue: "So you're telling me there's a chance?", funFact: "Jim Carrey's cracked tooth in the film was real; he chipped it as a kid and removed the cap for comedy effect.", image: "/images/movies/set2/13.png" },
             { id: 14, answer: "INSIDIOUS", clue: "It's not the house that is haunted.", funFact: "The entire film was shot on a micro-budget in just three weeks inside a residential house in Los Angeles.", image: "/images/movies/set2/14.png" },
             { id: 15, answer: "MAD MAX", clue: "Witness me across the post-apocalyptic wasteland.", funFact: "Over 80% of the spectacular stunt driving and fiery explosions in Fury Road were practical effects.", image: "/images/movies/set2/15.png" }
+          ]
+        },
+        {
+          id: 3,
+          name: 'Set 03: Hits, Thrillers & Drama',
+          puzzles: [
+            { id: 1, answer: "DESPICABLE ME", clue: "Gru and his army of yellow Minions.", funFact: "Minion speech is a mix of many real languages, food words, and gibberish.", image: "/images/movies/set3/1.png" },
+            { id: 2, answer: "IRON MAN", clue: "Tony Stark builds a powered suit of armor.", funFact: "Robert Downey Jr. improvised several famous lines during production.", image: "/images/movies/set3/2.png" },
+            { id: 3, answer: "THE FAST AND THE FURIOUS", clue: "High-speed street racing and family loyalty.", funFact: "The franchise began with a focus on underground street racing in Los Angeles.", image: "/images/movies/set3/3.png" },
+            { id: 4, answer: "BLACK MIRROR", clue: "Anthology series exploring dark sides of technology.", funFact: "Each episode acts as a standalone cautionary story with different casts.", image: "/images/movies/set3/4.png" },
+            { id: 5, answer: "KINGDOM OF HEAVEN", clue: "Crusades-era historical epic directed by Ridley Scott.", funFact: "The extended director's cut significantly expands character arcs and battle context.", image: "/images/movies/set3/5.png" },
+            { id: 6, answer: "MEMENTO", clue: "A man with short-term memory loss hunts his wife's killer.", funFact: "Christopher Nolan structured the narrative in reverse chronological order.", image: "/images/movies/set3/6.png" },
+            { id: 7, answer: "THE DAY AFTER TOMORROW", clue: "Sudden climate shift triggers a global freeze.", funFact: "Disaster films often blend weather science with large-scale visual effects.", image: "/images/movies/set3/7.png" },
+            { id: 8, answer: "500 DAYS OF SUMMER", clue: "An unconventional look at a non-linear romance.", funFact: "The story is told out of chronological order to mirror emotional memory.", image: "/images/movies/set3/8.png" },
+            { id: 9, answer: "FREE WILLY", clue: "A boy befriends a captive killer whale.", funFact: "Keiko, the whale who played Willy, later became the focus of a major rehabilitation effort.", image: "/images/movies/set3/9.png" },
+            { id: 10, answer: "CHILDS PLAY", clue: "A killer doll possessed by a serial killer's spirit.", funFact: "Chucky became one of horror cinema's most recognizable slasher icons.", image: "/images/movies/set3/10.png" },
+            { id: 11, answer: "AIRPLANE", clue: "Deadpan comedy spoof of disaster movies.", funFact: "The film packed rapid-fire visual gags and wordplay into almost every scene.", image: "/images/movies/set3/11.png" },
+            { id: 12, answer: "QUEENS GAMBIT", clue: "A chess prodigy rises through competitive tournaments.", funFact: "Interest in chess surged worldwide after the miniseries debuted.", image: "/images/movies/set3/12.png" },
+            { id: 13, answer: "THE SILENCE OF THE LAMBS", clue: "An FBI trainee seeks insight from a brilliant imprisoned psychiatrist.", funFact: "It won all five major Academy Awards: Picture, Director, Actor, Actress, and Adapted Screenplay.", image: "/images/movies/set3/13.png" },
+            { id: 14, answer: "AMERICAN SNIPER", clue: "War drama following Navy SEAL marksman Chris Kyle.", funFact: "It became one of the highest-grossing war films in box office history.", image: "/images/movies/set3/14.png" },
+            { id: 15, answer: "LIFE OF PI", clue: "A young man survives adrift on a lifeboat with a Bengal tiger.", funFact: "Ang Lee won Best Director for the film's visual storytelling and water sequences.", image: "/images/movies/set3/15.png" }
+          ]
+        },
+        {
+          id: 4,
+          name: 'Set 04: Sci-Fi, Mystery & TV Icons',
+          puzzles: [
+            { id: 1, answer: "STAR TREK", clue: "To boldly go where no one has gone before.", funFact: "The original series premiered in 1966 and launched decades of sci-fi television and film.", image: "/images/movies/set4/1.png" },
+            { id: 2, answer: "PANS LABYRINTH", clue: "Dark fantasy set in post-civil-war Spain.", funFact: "Guillermo del Toro designed creature effects with detailed practical makeup and prosthetics.", image: "/images/movies/set4/2.png" },
+            { id: 3, answer: "THE HUNGER GAMES", clue: "Televised survival competition in a dystopian nation.", funFact: "The story is set in Panem, divided into twelve districts around the Capitol.", image: "/images/movies/set4/3.png" },
+            { id: 4, answer: "GAME OF THRONES", clue: "Noble houses battle for the Iron Throne in Westeros.", funFact: "Filming spanned multiple countries to capture diverse climates and landscapes.", image: "/images/movies/set4/4.png" },
+            { id: 5, answer: "SCHOOL OF ROCK", clue: "A substitute teacher turns prep students into a rock band.", funFact: "Many of the young actors played their instruments live on set.", image: "/images/movies/set4/5.png" },
+            { id: 6, answer: "THE NUN", clue: "Gothic horror entry tied to The Conjuring universe.", funFact: "Set in an isolated abbey in Romania, it leans into eerie candlelit atmospheres.", image: "/images/movies/set4/6.png" },
+            { id: 7, answer: "DOCTOR STRANGE", clue: "A surgeon learns the mystic arts after an accident.", funFact: "Mirror-dimension sequences fold cityscapes like kaleidoscopes.", image: "/images/movies/set4/7.png" },
+            { id: 8, answer: "TRANSFORMER", clue: "Robots in disguise that shift into vehicles.", funFact: "The franchise originated in the 1980s across toys, comics, and animation.", image: "/images/movies/set4/8.png" },
+            { id: 9, answer: "GET OUT", clue: "A visit to a girlfriend's family estate turns sinister.", funFact: "Jordan Peele won the Academy Award for Best Original Screenplay for his directorial debut.", image: "/images/movies/set4/9.png" },
+            { id: 10, answer: "PINK PANTHER", clue: "Clumsy inspector and a famous jewel in animated form.", funFact: "Henry Mancini's jazzy theme music became a classic in its own right.", image: "/images/movies/set4/10.png" },
+            { id: 11, answer: "A STAR IS BORN", clue: "Musical drama about fame, mentorship, and heartbreak.", funFact: "The story has been adapted multiple times across different musical eras.", image: "/images/movies/set4/11.png" },
+            { id: 12, answer: "KNIVES OUT", clue: "A southern detective investigates a wealthy family mystery.", funFact: "Benoit Blanc's signature drawl was inspired by classic mystery sleuths.", image: "/images/movies/set4/12.png" },
+            { id: 13, answer: "WHEN HARRY MET SALLY", clue: "Years of banter test whether men and women can just be friends.", funFact: "The diner scene takes place at Katz's Delicatessen in New York City.", image: "/images/movies/set4/13.png" },
+            { id: 14, answer: "GHOSTBUSTER", clue: "Paranormal investigators bust specters in New York.", funFact: "The proton pack hum and ghost trap effects became instant pop-culture staples.", image: "/images/movies/set4/14.png" },
+            { id: 15, answer: "THE SOPRANOS", clue: "New Jersey mob boss balances crime family and therapy.", funFact: "Widely credited with helping kick off the modern golden age of prestige TV drama.", image: "/images/movies/set4/15.png" }
+          ]
+        },
+        {
+          id: 5,
+          name: 'Set 05: Classics, Anime & Favorites',
+          puzzles: [
+            { id: 1, answer: "SUPERMAN", clue: "Metropolis's caped hero from Krypton.", funFact: "Created in 1938 by Jerry Siegel and Joe Shuster, Superman helped define the superhero genre.", image: "/images/movies/set5/1.png" },
+            { id: 2, answer: "TITANIC", clue: "Romance aboard the ill-fated ocean liner.", funFact: "James Cameron's epic tied the record for the most Academy Awards won by a single film.", image: "/images/movies/set5/2.png" },
+            { id: 3, answer: "TOP GUN", clue: "Elite fighter pilots train at naval aviation school.", funFact: "Aviation sequences combined real fighter jets with high-G cockpit filming.", image: "/images/movies/set5/3.png" },
+            { id: 4, answer: "GREYS ANATOMY", clue: "Long-running medical drama set at a Seattle hospital.", funFact: "Every episode title is named after a song.", image: "/images/movies/set5/4.png" },
+            { id: 5, answer: "FAMILY GUY", clue: "Seth MacFarlane's animated sitcom about the Griffin family.", funFact: "Known for fast cutaway gags and satirical pop-culture references.", image: "/images/movies/set5/5.png" },
+            { id: 6, answer: "SCARFACE", clue: "Tony Montana's rise and fall in 1980s Miami.", funFact: "The neon-lit aesthetic and quotes remain heavily referenced in hip-hop and cinema.", image: "/images/movies/set5/6.png" },
+            { id: 7, answer: "YOUR NAME", clue: "Makoto Shinkai's anime hit about two teens swapping lives.", funFact: "Comet Tiamat and changing seasons anchor the film's emotional connection across distance.", image: "/images/movies/set5/7.png" },
+            { id: 8, answer: "PROJECT HAIL MARY", clue: "Sci-fi story of an astronaut waking up with amnesia on a deep-space mission.", funFact: "Based on Andy Weir's novel focused on orbital mechanics and makeshift problem-solving.", image: "/images/movies/set5/8.png" },
+            { id: 9, answer: "MARTY SUPREME", clue: "Ping-pong-inspired drama starring Timothee Chalamet.", funFact: "Directed by Josh Safdie with intense pacing and period detail.", image: "/images/movies/set5/9.png" },
+            { id: 10, answer: "FRIDAY THE 13TH", clue: "Camp Crystal Lake slasher franchise.", funFact: "Jason Voorhees became one of horror's most recognizable masked figures.", image: "/images/movies/set5/10.png" },
+            { id: 11, answer: "LEGALLY BLONDE", clue: "Elle Woods heads to Harvard Law School.", funFact: "The 'bend and snap' became a playful pop-culture catchphrase.", image: "/images/movies/set5/11.png" },
+            { id: 12, answer: "SOUND OF MUSIC", clue: "A governess brings music to a von Trapp family household in Austria.", funFact: "Features classic Rodgers and Hammerstein songs like 'Do-Re-Mi' and 'My Favorite Things'.", image: "/images/movies/set5/12.png" },
+            { id: 13, answer: "THE BIG BANG THEORY", clue: "Sitcom centered on physicists and their neighbors.", funFact: "Ran for twelve seasons and popularized nerd-culture humor in prime time.", image: "/images/movies/set5/13.png" },
+            { id: 14, answer: "LOST IN TRANSLATION", clue: "An actor and a young graduate form a quiet bond in Tokyo.", funFact: "Sofia Coppola won Best Original Screenplay for the intimate character study.", image: "/images/movies/set5/14.png" },
+            { id: 15, answer: "A NIGHTMARE BEFORE CHRISTMAS", clue: "Jack Skellington discovers Halloween Town and Christmas Town.", funFact: "Stop-motion animation required painstaking frame-by-frame puppet movement.", image: "/images/movies/set5/15.png" }
           ]
         }
       ]
@@ -176,21 +239,23 @@ export default function App() {
   // Helper key for solved mapping
   const getPuzzleKey = (catId, setId, puzzleId) => `${catId}-${setId}-${puzzleId}`;
 
-  // Calculate solved counts per category
-  const getCategorySolvedCount = (cat) => {
-    let count = 0;
-    cat.sets.forEach(set => {
-      set.puzzles.forEach(p => {
-        if (solvedPuzzles[getPuzzleKey(cat.id, set.id, p.id)]) count++;
+  // Calculate total puzzles and solved count per category
+  const getCategoryStats = (cat) => {
+    let total = 0;
+    let solved = 0;
+    cat.sets.forEach((set) => {
+      total += set.puzzles.length;
+      set.puzzles.forEach((p) => {
+        if (solvedPuzzles[getPuzzleKey(cat.id, set.id, p.id)]) solved++;
       });
     });
-    return count;
+    return { total, solved };
   };
 
   // Calculate solved count per set
   const getSetSolvedCount = (catId, setId, setPuzzles) => {
     let count = 0;
-    setPuzzles.forEach(p => {
+    setPuzzles.forEach((p) => {
       if (solvedPuzzles[getPuzzleKey(catId, setId, p.id)]) count++;
     });
     return count;
@@ -201,15 +266,15 @@ export default function App() {
     if (!activePuzzle || !selectedCategory || !selectedSet) return;
     const cleanAnswer = activePuzzle.answer.replace(/\s+/g, '');
     const rawInput = e.target.value.toUpperCase().replace(/[^A-Z]/g, '');
-    
+
     if (rawInput.length <= cleanAnswer.length) {
       const key = getPuzzleKey(selectedCategory.id, selectedSet.id, activePuzzle.id);
       const newGuesses = { ...currentGuesses, [key]: rawInput };
       setCurrentGuesses(newGuesses);
 
       if (rawInput === cleanAnswer) {
-        setSolvedPuzzles(prev => ({ ...prev, [key]: true }));
-        setCoins(prev => prev + 10);
+        setSolvedPuzzles((prev) => ({ ...prev, [key]: true }));
+        setCoins((prev) => prev + 10);
         setShowWinModal(true);
       }
     }
@@ -218,7 +283,7 @@ export default function App() {
   return (
     <div className="min-h-screen bg-slate-950 flex items-center justify-center p-0 sm:py-6">
       <div className="w-full sm:max-w-[390px] h-screen sm:h-[844px] bg-paper dot-grid border-4 border-ink shadow-2xl sm:rounded-3xl flex flex-col overflow-hidden relative">
-        
+
         {/* Top Header */}
         <div className="px-4 pt-4 pb-2 flex items-start justify-between shrink-0">
           <div>
@@ -227,20 +292,20 @@ export default function App() {
               <span className="bg-electricYellow px-2 py-0.5 border-2 border-ink inline-block shadow-cartoon-sm">GRIDDLES!</span>
             </h1>
           </div>
-          
+
           <div className="flex flex-col items-end gap-1.5">
             <div className="bg-white border-3 border-ink px-3 py-1 rounded-full font-black text-xs shadow-cartoon-sm flex items-center gap-1">
               <span>⭐</span> {coins}
             </div>
             <div className="text-[10px] font-black text-right leading-tight">
-              ✨ Know it?<br/>Show it.
+              ✨ Know it?<br />Show it.
             </div>
           </div>
         </div>
 
         {/* Screen Area */}
         <div className="flex-1 overflow-y-auto px-4 pb-4 flex flex-col relative">
-          
+
           {/* 1. HOME SCREEN (Category Choice) */}
           {currentScreen === 'home' && (
             <div className="space-y-3.5 flex-1 flex flex-col justify-center">
@@ -248,13 +313,14 @@ export default function App() {
                 <h2 className="font-black text-base tracking-wide text-slate-800">Pick your playground</h2>
                 <span className="text-lg">〰️</span>
               </div>
-              
+
               <div className="space-y-3">
                 {categories.map((cat) => {
-                  const solvedCount = getCategorySolvedCount(cat);
+                  const { total, solved } = getCategoryStats(cat);
+                  const progressPercent = total > 0 ? (solved / total) * 100 : 0;
 
                   return (
-                    <button 
+                    <button
                       key={cat.id}
                       onClick={() => {
                         setSelectedCategory(cat);
@@ -269,7 +335,7 @@ export default function App() {
                           </div>
                           <div>
                             <div className="font-black text-lg leading-tight">{cat.name}</div>
-                            <div className="text-xs font-bold text-slate-700 mt-0.5">{solvedCount} / 30 Solved</div>
+                            <div className="text-xs font-bold text-slate-700 mt-0.5">{solved} / {total} Solved</div>
                           </div>
                         </div>
                         <div className="w-8 h-8 bg-white border-2 border-ink rounded-lg flex items-center justify-center font-black shadow-cartoon-sm">
@@ -279,9 +345,9 @@ export default function App() {
 
                       {/* Progress Bar */}
                       <div className="mt-3 w-full bg-white/60 border-2 border-ink h-3 rounded-full overflow-hidden p-0.5">
-                        <div 
+                        <div
                           className="bg-ink h-full rounded-full transition-all duration-500"
-                          style={{ width: `${(solvedCount / 30) * 100}%` }}
+                          style={{ width: `${progressPercent}%` }}
                         />
                       </div>
                     </button>
@@ -293,23 +359,24 @@ export default function App() {
 
           {/* 2. SET CHOICE SCREEN */}
           {currentScreen === 'sets' && selectedCategory && (
-            <div className="space-y-4 flex-1 flex flex-col">
-              <button 
+            <div className="space-y-3 flex-1 flex flex-col">
+              <button
                 onClick={() => setCurrentScreen('home')}
                 className="self-start bg-white border-2 border-ink px-3 py-1 rounded-xl font-bold text-xs shadow-cartoon-sm"
               >
                 ⬅️ Back to Categories
               </button>
-              
-              <div className="text-center my-1">
-                <span className="text-4xl">{selectedCategory.emoji}</span>
-                <h3 className="font-black text-xl mt-1">{selectedCategory.name}</h3>
+
+              <div className="text-center my-0.5">
+                <span className="text-3xl">{selectedCategory.emoji}</span>
+                <h3 className="font-black text-xl mt-0.5">{selectedCategory.name}</h3>
                 <p className="text-xs font-bold text-slate-600">Select a Set to Play</p>
               </div>
 
-              <div className="space-y-3.5 flex-1 flex flex-col justify-center pb-6">
+              <div className="space-y-2.5 flex-1 flex flex-col justify-center pb-4 overflow-y-auto">
                 {selectedCategory.sets.map((set) => {
                   const setSolved = getSetSolvedCount(selectedCategory.id, set.id, set.puzzles);
+                  const setTotal = set.puzzles.length;
 
                   return (
                     <button
@@ -318,17 +385,17 @@ export default function App() {
                         setSelectedSet(set);
                         setCurrentScreen('grid');
                       }}
-                      className={`w-full border-3 border-ink p-4 rounded-2xl font-black text-left flex justify-between items-center shadow-cartoon transition-transform active:translate-x-0.5 active:translate-y-0.5 ${
-                        setSolved === 15 ? 'bg-mintGreen' : 'bg-electricYellow hover:bg-yellow-300'
+                      className={`w-full border-3 border-ink p-3 rounded-2xl font-black text-left flex justify-between items-center shadow-cartoon transition-transform active:translate-x-0.5 active:translate-y-0.5 shrink-0 ${
+                        setSolved === setTotal ? 'bg-mintGreen' : 'bg-electricYellow hover:bg-yellow-300'
                       }`}
                     >
                       <div>
-                        <div className="text-base">{set.name}</div>
-                        <div className="text-xs font-bold text-slate-700 mt-1">15 Puzzles Available</div>
+                        <div className="text-sm">{set.name}</div>
+                        <div className="text-[11px] font-bold text-slate-700 mt-0.5">{setTotal} Puzzles Available</div>
                       </div>
-                      <div className="flex items-center gap-1.5 bg-white border-2 border-ink px-3 py-1.5 rounded-xl shadow-cartoon-sm text-xs">
-                        <span>{setSolved} / 15</span>
-                        <span>{setSolved === 15 ? '✓' : '→'}</span>
+                      <div className="flex items-center gap-1.5 bg-white border-2 border-ink px-2.5 py-1 rounded-xl shadow-cartoon-sm text-xs shrink-0">
+                        <span>{setSolved} / {setTotal}</span>
+                        <span>{setSolved === setTotal ? '✓' : '→'}</span>
                       </div>
                     </button>
                   );
@@ -340,25 +407,25 @@ export default function App() {
           {/* 3. 15-ICON SET GRID SCREEN */}
           {currentScreen === 'grid' && selectedSet && selectedCategory && (
             <div className="space-y-3 flex-1 flex flex-col">
-              <button 
+              <button
                 onClick={() => setCurrentScreen('sets')}
                 className="self-start bg-white border-2 border-ink px-3 py-1 rounded-xl font-bold text-xs shadow-cartoon-sm"
               >
                 ⬅️ Back to Sets
               </button>
-              
+
               <div className="text-center">
                 <h3 className="font-black text-lg">{selectedCategory.name}</h3>
                 <p className="text-xs font-bold text-slate-600">{selectedSet.name}</p>
               </div>
-              
+
               <div className="grid grid-cols-3 gap-2.5 overflow-y-auto pb-4">
                 {selectedSet.puzzles.map((puzzle) => {
                   const key = getPuzzleKey(selectedCategory.id, selectedSet.id, puzzle.id);
                   const isSolved = solvedPuzzles[key];
 
                   return (
-                    <button 
+                    <button
                       key={puzzle.id}
                       onClick={() => {
                         setActivePuzzle(puzzle);
@@ -366,8 +433,8 @@ export default function App() {
                       }}
                       className="aspect-square bg-white border-3 border-ink rounded-xl overflow-hidden relative shadow-cartoon-sm transition-transform active:translate-x-1 active:translate-y-1 group"
                     >
-                      <img 
-                        src={puzzleImagePath(selectedCategory.id, selectedSet.id, puzzle.id)} 
+                      <img
+                        src={puzzleImagePath(selectedCategory.id, selectedSet.id, puzzle.id)}
                         alt={`Puzzle #${puzzle.id}`}
                         className="w-full h-full object-cover"
                         onError={(e) => {
@@ -400,9 +467,9 @@ export default function App() {
 
             return (
               <div className="space-y-2.5 flex-1 flex flex-col justify-start">
-                
+
                 {/* Hidden native input */}
-                <input 
+                <input
                   ref={inputRef}
                   type="text"
                   value={currentWord}
@@ -412,7 +479,7 @@ export default function App() {
 
                 {/* Top Navigation */}
                 <div className="flex justify-between items-center shrink-0">
-                  <button 
+                  <button
                     onClick={() => setCurrentScreen('grid')}
                     className="bg-white border-2 border-ink px-3 py-0.5 rounded-xl font-bold text-xs shadow-cartoon-sm"
                   >
@@ -425,8 +492,8 @@ export default function App() {
 
                 {/* Compact Artwork Frame */}
                 <div className="w-36 h-36 mx-auto bg-white border-3 border-ink rounded-2xl shadow-cartoon overflow-hidden flex items-center justify-center shrink-0">
-                  <img 
-                    src={puzzleImagePath(selectedCategory.id, selectedSet.id, activePuzzle.id)} 
+                  <img
+                    src={puzzleImagePath(selectedCategory.id, selectedSet.id, activePuzzle.id)}
                     alt={`Puzzle #${activePuzzle.id}`}
                     className="w-full h-full object-cover"
                     onError={(e) => {
@@ -441,7 +508,7 @@ export default function App() {
                 </div>
 
                 {/* Interactive Answer Boxes */}
-                <div 
+                <div
                   onClick={() => {
                     if (inputRef.current) inputRef.current.focus();
                   }}
@@ -452,7 +519,7 @@ export default function App() {
                       if (char === ' ') {
                         return <div key={idx} className="w-2.5 h-8" />;
                       }
-                      
+
                       const currentChar = currentWord[letterIndex] || "";
                       letterIndex++;
 
@@ -479,7 +546,7 @@ export default function App() {
                 <div className="text-4xl">🎉</div>
                 <h3 className="font-black text-xl">CORRECT!</h3>
                 <p className="font-bold text-sm text-slate-700">You solved <span className="underline">{activePuzzle.answer}</span>!</p>
-                
+
                 {/* Fun Fact Card */}
                 <div className="bg-amber-100 border-3 border-ink p-3 rounded-2xl shadow-cartoon-sm text-left">
                   <div className="font-black text-xs text-amber-800 mb-1">🧠 FUN FACT:</div>
@@ -488,7 +555,7 @@ export default function App() {
 
                 <div className="text-xs font-black text-emerald-600">+10 Coins Earned! 🪙</div>
 
-                <button 
+                <button
                   onClick={() => {
                     setShowWinModal(false);
                     setCurrentScreen('grid');

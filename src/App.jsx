@@ -25,6 +25,7 @@ export default function App() {
       id: 'movies',
       name: 'Movies & Series',
       emoji: '🍿',
+      iconImage: '/images/categories/movies.png',
       toneClass: 'gr-card-pink',
       sets: [
         {
@@ -138,6 +139,7 @@ export default function App() {
       id: 'people',
       name: 'Famous People',
       emoji: '😎',
+      iconImage: '/images/categories/people.png',
       toneClass: 'gr-card-blue',
       sets: [
         {
@@ -251,6 +253,7 @@ export default function App() {
       id: 'cities',
       name: 'World Cities',
       emoji: '🗼',
+      iconImage: '/images/categories/cities.png',
       toneClass: 'gr-card-mint',
       sets: [
         {
@@ -519,6 +522,13 @@ export default function App() {
           font-size: 34px;
           transform: rotate(-7deg);
           box-shadow: 3px 3px 0 var(--gr-ink);
+          overflow: hidden;
+        }
+
+        .gr-doodle img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
         }
 
         .gr-card-pink .gr-doodle { background: var(--gr-pink); }
@@ -632,7 +642,19 @@ export default function App() {
                         }}
                         className={`gr-cat-card ${cat.toneClass}`}
                       >
-                        <div className="gr-doodle">{cat.emoji}</div>
+                        <div className="gr-doodle">
+                          <img
+                            src={cat.iconImage}
+                            alt={`${cat.name} icon`}
+                            onError={(e) => {
+                              e.currentTarget.style.display = 'none';
+                              if (e.currentTarget.nextSibling) {
+                                e.currentTarget.nextSibling.style.display = 'inline';
+                              }
+                            }}
+                          />
+                          <span style={{ display: 'none' }}>{cat.emoji}</span>
+                        </div>
                         <div className="flex-1 min-w-0">
                           <div className="text-[20px] font-black leading-tight truncate">{cat.name}</div>
                           <div className="text-xs font-extrabold text-[#556475] mt-0.5">
@@ -678,8 +700,19 @@ export default function App() {
               </div>
 
               <div className="text-center mb-3">
-                <div className="inline-flex items-center gap-2 bg-white border-3 border-[#1e293b] px-4 py-1.5 rounded-2xl shadow-[3px_3px_0_#1e293b]">
-                  <span className="text-2xl">{selectedCategory.emoji}</span>
+                <div className="inline-flex items-center gap-2.5 bg-white border-3 border-[#1e293b] px-4 py-1.5 rounded-2xl shadow-[3px_3px_0_#1e293b]">
+                  <img
+                    src={selectedCategory.iconImage}
+                    alt={`${selectedCategory.name} icon`}
+                    className="w-7 h-7 object-contain rounded-lg"
+                    onError={(e) => {
+                      e.currentTarget.style.display = 'none';
+                      if (e.currentTarget.nextSibling) {
+                        e.currentTarget.nextSibling.style.display = 'inline';
+                      }
+                    }}
+                  />
+                  <span className="text-2xl" style={{ display: 'none' }}>{selectedCategory.emoji}</span>
                   <h3 className="font-black text-lg m-0">{selectedCategory.name}</h3>
                 </div>
                 <p className="text-xs font-extrabold text-[#64748b] mt-2 mb-0">Choose a set to open its 15 puzzles</p>

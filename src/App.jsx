@@ -582,6 +582,22 @@ export default function App() {
           padding: 0;
         }
 
+        .gr-solved-badge {
+          position: absolute;
+          top: 6px;
+          left: 6px;
+          width: 24px;
+          height: 24px;
+          border-radius: 8px;
+          background: var(--gr-mint);
+          border: 2.5px solid var(--gr-ink);
+          box-shadow: 2px 2px 0 var(--gr-ink);
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          color: var(--gr-ink);
+        }
+
         .gr-action-btn {
           width: 100%;
           background: var(--gr-yellow);
@@ -796,17 +812,21 @@ export default function App() {
                         }}
                       />
 
-                      <div className="absolute top-1.5 left-1.5 bg-[#1e293b] text-white text-[10px] font-black px-1.5 py-0.5 rounded-md border border-white/40">
-                        #{puzzle.id}
-                      </div>
-
                       {isSolved && (
-                        <div className="absolute inset-0 bg-[#9ce9c0]/45 backdrop-blur-[1px] flex flex-col items-center justify-center">
-                          <span className="text-xl drop-shadow">✅</span>
-                          <span className="text-[9px] font-black bg-white border-2 border-[#1e293b] px-1.5 py-0.5 rounded-md shadow-[2px_2px_0_#1e293b] mt-0.5">
-                            Fact
-                          </span>
-                        </div>
+                        <span className="gr-solved-badge" aria-label="Solved">
+                          <svg
+                            viewBox="0 0 16 16"
+                            width="13"
+                            height="13"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2.8"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          >
+                            <polyline points="3 8.5 6.5 12 13 4.5" />
+                          </svg>
+                        </span>
                       )}
                     </button>
                   );
